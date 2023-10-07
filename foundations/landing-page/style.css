@@ -1,0 +1,330 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+  /* inherit font so you can define styles 
+  for h1, h* elements instead of rely on user 
+  agent defaults */
+  font: inherit;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* Set core body defaults */
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/**************************************************************************************/
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;0,900;1,300&display=swap");
+
+:root {
+  --clr-bg-hero: #1f2937;
+  --clr-bg-info: #f9faf8;
+  --clr-bg-quote: #e5e7eb;
+  --clr-bg-cta: #f9faf8;
+  --clr-bg-footer: #1f2937;
+
+  --clr-cta-btn: #3882f6;
+
+  --clr-font-header: #f9faf8;
+  --clr-font-header-info: #1f2937;
+  --clr-font-secondary: #e5e7eb;
+  --clr-font-quote: #1f2937;
+
+  --ff-primary: "Roboto", sans-serif;
+
+  --ff-body: var(--ff-primary);
+  --ff-heading: var(--ff-primary);
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-bold: 700;
+  --fw-extra-bold: 900;
+
+  --fs-300: ;
+  --fs-400: ;
+  --fs-700: ;
+  --fs-900: ;
+
+  --fs-body: 1.2rem;
+  --fs-primary-heading: 3rem;
+  --fs-nav-logo: 1.5rem;
+  --fs-nav-link: 1.125rem;
+  --fs-info-heading: 2.25rem;
+  --fs-info-subtext: 1.125rem;
+  --fs-quote: 2.25rem;
+  --fs-quote-author: 1.5rem;
+  --fs-cta-header: 1.5rem;
+  --fs-cta-text: 1.125rem;
+
+  --line-height: 1.2;
+
+  --max-width-lg: 60%;
+  --max-width-md: 50%;
+}
+
+/* Container setup */
+
+* {
+  font-family: var(--ff-primary);
+}
+
+.container-lg {
+  max-width: var(--max-width-lg);
+  margin: auto;
+}
+
+.container-md {
+  max-width: var(--max-width-md);
+  margin: auto;
+}
+
+/* global typograph */
+
+body {
+  line-height: var(--line-height);
+}
+
+/* Header */
+
+.page-header {
+  background-color: var(--clr-bg-hero);
+  color: var(--clr-font-header);
+
+  padding: 1.5rem 0;
+}
+
+.page-header .container-lg {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: var(--fs-nav-logo);
+  font-weight: var(--fw-bold);
+}
+
+.site-nav {
+  list-style-type: none;
+  font-size: var(--fs-nav-link);
+
+  display: flex;
+  gap: 1rem;
+}
+
+.site-nav > li > a {
+  display: block;
+  color: var(--clr-font-header);
+  text-decoration: none;
+}
+
+/* hero section */
+
+.hero {
+  background-color: var(--clr-bg-hero);
+  color: var(--clr-font-header);
+
+  padding: 8rem 0;
+}
+
+.hero .container-lg {
+  display: flex;
+  gap: 6rem;
+}
+
+.hero-heading {
+  font-size: var(--fs-primary-heading);
+  font-weight: var(--fw-extra-bold);
+}
+
+.hero-container > p {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+}
+
+.btn {
+  font-weight: var(--fw-bold);
+  border-radius: 10px;
+}
+
+.hero-cta {
+  font-size: var(--fs-cta-text);
+  color: var(--clr-font-header);
+  background-color: var(--clr-cta-btn);
+  border: none;
+  margin-top: 0.75em;
+  padding: 0.5em 2em;
+}
+
+.img-placeholder {
+  background-color: grey;
+  width: 575px;
+  flex-shrink: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Information section */
+
+.information {
+  background-color: var(--clr-font-header);
+
+  padding: 3rem 0;
+}
+
+.info-heading {
+  font-size: var(--fs-info-heading);
+  font-weight: var(--fw-extra-bold);
+  color: var(--clr-font-header-info);
+  text-align: center;
+}
+
+.card-container {
+  display: flex;
+  gap: 3rem;
+  justify-content: space-between;
+
+  padding: 3rem 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card > p {
+  /* color: var(--clr-font-secondary); */
+  text-align: center;
+  font-size: var(--fs-info-subtext);
+
+  padding: 0.75rem 0;
+}
+
+.shape {
+  border: 4px solid var(--clr-cta-btn);
+  border-radius: 15px;
+  height: 175px;
+  width: 175px;
+}
+
+/* Quote section */
+
+.quote {
+  background-color: var(--clr-bg-quote);
+  padding: 8rem 0;
+}
+
+.quote-contents {
+  color: var(--clr-font-quote);
+  font-size: var(--fs-quote);
+  font-weight: var(--fw-light);
+  font-style: italic;
+  padding-left: 2rem;
+}
+
+.quote-author {
+  font-size: var(--fs-quote-author);
+  font-weight: var(--fw-bold);
+  text-align: end;
+}
+
+/* CTA signup section */
+
+.signup {
+  padding: 6rem 0;
+}
+
+.signup-contents.container-lg {
+  background-color: var(--clr-cta-btn);
+  color: var(--clr-font-secondary);
+  border-radius: 7px;
+
+  padding: 4rem 8rem;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.signup-text > h3 {
+  font-size: var(--fs-cta-header);
+  font-weight: var(--fw-bold);
+}
+
+.signup-text > p {
+  font-size: var(--fs-cta-text);
+}
+
+.signup-cta {
+  background-color: var(--clr-cta-btn);
+  border: 2px solid var(--clr-bg-cta);
+  font-size: var(--fs-cta-text);
+  color: var(--clr-bg-cta);
+
+  padding: 0.5em 2em;
+}
+
+/* footer */
+
+.footer {
+  background-color: var(--clr-bg-footer);
+  color: var(--clr-font-secondary);
+  text-align: center;
+  font-size: var(--fs-body);
+  padding: 2.5rem 0;
+}
