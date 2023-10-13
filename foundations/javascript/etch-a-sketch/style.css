@@ -102,7 +102,7 @@ h1 {
   margin: 1em auto;
 
   /* background-color: red; */
-  border: 1px solid black;
+  /* border: 1px solid black; */
 
   display: grid;
 
@@ -123,4 +123,22 @@ h1 {
   /* width: 100px; */
 
   /* flex: 1 0 25%; */
+}
+
+button {
+  margin: 1em auto;
+  display: block;
+
+  background-color: #fff;
+  color: red;
+  font-weight: 700;
+  border: 2px solid red;
+  border-radius: 10px;
+
+  padding: 1em 2em;
+}
+
+button:hover {
+  color: #fff;
+  background-color: red;
 }
