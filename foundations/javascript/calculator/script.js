@@ -1,45 +1,46 @@
-const firstNumber = 0;
-const operator = "+";
-const secondNumber = 0;
+const display = document.querySelector('#display');
+const numberButtons = document.querySelectorAll('#number');
+const operatorButtons = document.querySelectorAll('#operator');
+const equalsButton = document.querySelector('#equals');
+const clearButton = document.querySelector('#clear');
 
-const display = document.querySelector('.display');
-const buttons = document.querySelectorAll('button');
+let firstNumber = "";
+let operator = "";
+let secondNumber = "";
 
-buttons.forEach(button => {
-    button.addEventListener('click', e => {
+let displayValue = "";
 
-        let first = 0;
-        let second = 0;
+// basic functions
+let add = (a, b) => a + b;
+let subtract = (a, b) => a - b;
+let multiply = (a, b) => a * b;
+let divide = (numerator, denominator) => {
+    if (denominator === 0) return "ERROR";
+    return numerator / denominator;
+};
 
-        if (button.classList.contains('operator')) {
-            first = parseFloat(display.textContent);
-            console.log(`first: ${first}`);
-        }
-
-        if (first != 0 && button.classList.contains('number')) {
-            display.textContent = "";
-            second = parseInt(display.textContent);
-            console.log(`first: ${second}`);
-        }
-
-        if (button.classList.contains('equals')) {
-
-
-        }
-
-        if (button.classList.contains('clear')) clearDisplay();
-
-
-        if (button.classList.contains('number'))
-            display.textContent += button.textContent;
-
-        e.stopPropagation();
-    });
-});
-
-
-let operate = (operator, first, second, func) => {
-
+let operate = (first, second, op) => {
+    let result = 0;
+    console.log(`op: ${op} type: ${typeof op}`);
+    // switch for operators
+    switch (op) {
+        case "÷":
+            result = divide(first, second);
+            break;
+        case "×":
+            result = multiply(first, second);
+            break;
+        case "–":
+            result = subtract(first, second);
+            break;
+        case "+":
+            result = add(first, second);
+            break;
+        default:
+            display.textContent = "ERROR";
+    }
+    console.log(`result: ${result}`);
+    return result;
 };
 
 
@@ -47,22 +48,37 @@ let clearDisplay = () => {
     display.textContent = "";
 };
 
+numberButtons.forEach(button => {
+    button.addEventListener('click', e => {
+        if (display.textContent.length === 7) return;
+        if (button.textContent === '.' && display.textContent.includes('.')) return;
+        if (operator.length !== 0) clearDisplay();
 
+        display.textContent += button.textContent;
+        e.stopPropagation();
+    });
+});
 
-// basic functions
-let add = (a, b) => {
-    return a + b;
-};
+clearButton.addEventListener('click', e => {
+    clearDisplay();
+    e.stopPropagation();
+});
 
-let subtract = (a, b) => {
-    return a - b;
-};
+operatorButtons.forEach(button => {
+    button.addEventListener('click', e => {
+        // if secondNumber.length !=== 0
+        firstNumber = parseFloat(display.textContent);
+        operator = button.innerText;
 
-let multiply = (a, b) => {
-    return a * b;
-};
+        e.stopPropagation();
+    });
+});
 
-let divide = (numerator, denominator) => {
-    if (denominator === 0) return "ERROR";
-    return numerator / denominator;
-};
+equalsButton.addEventListener('click', e => {
+    secondNumber = parseFloat(display.textContent);
+    let result = operate(firstNumber, secondNumber, operator);
+    clearDisplay();
+    display.textContent = result;
+
+    e.stopPropagation();
+});

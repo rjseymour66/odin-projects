@@ -140,7 +140,7 @@ body {
 
 .button-row {
   display: flex;
-  gap: 0.5em;
+  gap: 1em;
   justify-content: space-between;
 
   /* border: 1px solid red; */
@@ -160,15 +160,14 @@ body {
 
   height: var(--btn-height-width);
   width: var(--btn-height-width);
-  flex: 0 0 auto;
+  flex-shrink: 0;
 }
 
 .double-wide {
-  height: var(--btn-height-width);
-  width: calc(var(--btn-height-width) * 2.25);
   border-radius: 60px;
   justify-content: left;
-  padding-left: 2.5rem;
+  padding-left: 2.25rem;
+  flex-grow: 1;
 }
 
 .btn-light {
@@ -180,8 +179,7 @@ body {
   color: #fff;
 }
 
-.operator,
-.equals {
+.operator {
   background-color: orange;
   color: #fff;
 }
