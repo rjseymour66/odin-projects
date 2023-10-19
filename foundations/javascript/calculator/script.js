@@ -44,7 +44,8 @@ numberButtons.forEach(button => {
     button.addEventListener('click', e => {
 
 
-        if (firstOperand.toString() === displayValue && operator !== "") {
+        if ((firstOperand.toString() === displayValue ||
+            secondOperand.toString() === displayValue) && operator !== "") {
             displayValue = "";
         }
 
@@ -67,10 +68,9 @@ let updateDisplay = (dVal) => {
 operatorButtons.forEach(button => {
     button.addEventListener('click', e => {
 
-        operator = button.textContent;
-        console.log(`operator: ${operator}`);
-
         assignDisplayToOperands();
+
+        operator = button.textContent;
 
         e.stopPropagation();
     });
@@ -82,14 +82,13 @@ let assignDisplayToOperands = () => {
         firstOperand = parseFloat(display.textContent);
     } else if (secondOperand === 0) {
         secondOperand = parseFloat(display.textContent);
-    } else {
-        firstOperand += operate(firstOperand, secondOperand, operator);
     }
 
-    console.log(`firstOperand: ${firstOperand}`);
-    console.log(`secondOperand: ${secondOperand}`);
-    console.log(`operator: ${operator}`);
-
+    if (firstOperand !== 0 && secondOperand !== 0) {
+        firstOperand = operate(firstOperand, secondOperand, operator);
+        secondOperand = 0;
+        display.textContent = firstOperand.toString();
+    }
 };
 
 
@@ -97,7 +96,8 @@ equalsButton.addEventListener('click', e => {
     console.log('**** In equals ****');
     assignDisplayToOperands();
 
-    display.textContent = operate(firstOperand, secondOperand, operator);
+    if (secondOperand === 0) display.textContent = firstOperand;
+    else display.textContent = operate(firstOperand, secondOperand, operator);
 
     e.preventDefault();
 });
