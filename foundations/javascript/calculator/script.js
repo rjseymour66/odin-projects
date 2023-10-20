@@ -1,13 +1,19 @@
-const display = document.querySelector('#display');
-const numberButtons = document.querySelectorAll('#number');
-const operatorButtons = document.querySelectorAll('#operator');
-const equalsButton = document.querySelector('#equals');
-const clearButton = document.querySelector('#clear');
+const display = document.querySelector("#display");
+const numberButtons = document.querySelectorAll("#number");
+const operatorButtons = document.querySelectorAll("#operator");
+const equalsButton = document.querySelector("#equals");
+const clearButton = document.querySelector("#clear");
+const percentButton = document.querySelector("#percent");
+const signButton = document.querySelector("#swap-sign");
 
-let firstOperand = 0;
-let secondOperand = 0;
+let firstOperand = "";
+let secondOperand = "";
 let operator = "";
-let displayValue = "";
+
+let displayText = "";
+let displayValue = 0;
+
+let resetDisplay = false;
 
 // basic functions
 let add = (a, b) => a + b;
@@ -40,72 +46,88 @@ let operate = (first, second, op) => {
     return result;
 };
 
-numberButtons.forEach(button => {
-    button.addEventListener('click', e => {
+let updateDisplayText = (text) => {
+    display.textContent = text;
+};
 
+let getDisplayValue = (text) => {
+    let result = parseFloat(text);
+    displayText = "";
+    return result;
+};
 
-        if ((firstOperand.toString() === displayValue ||
-            secondOperand.toString() === displayValue) && operator !== "") {
-            displayValue = "";
+percentButton.addEventListener("click", (e) => {
+    displayValue = getDisplayValue(display.textContent);
+    let percent = displayValue / 100;
+    updateDisplayText(percent.toString());
+});
+
+signButton.addEventListener("click", (e) => {
+    let swapped = parseFloat(display.textContent) * -1;
+    displayText = swapped;
+    updateDisplayText(swapped.toString());
+});
+
+numberButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+        // reset display
+        if (resetDisplay === true) {
+            updateDisplayText("");
+            resetDisplay = false;
         }
 
-        // add button value to display
-        displayValue += button.textContent;
+        if (button.textContent === "." && displayText.includes(".")) return;
 
-        // update UI
-        updateDisplay(displayValue);
+        // text sizes
 
-        e.stopPropagation();
-    });
-});
-
-
-let updateDisplay = (dVal) => {
-
-    display.textContent = dVal;
-};
-
-operatorButtons.forEach(button => {
-    button.addEventListener('click', e => {
-
-        assignDisplayToOperands();
-
-        operator = button.textContent;
+        displayText += button.textContent;
+        updateDisplayText(displayText);
 
         e.stopPropagation();
     });
 });
 
-let assignDisplayToOperands = () => {
+operatorButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+        displayValue = getDisplayValue(displayText);
 
-    if (firstOperand === 0) {
-        firstOperand = parseFloat(display.textContent);
-    } else if (secondOperand === 0) {
-        secondOperand = parseFloat(display.textContent);
-    }
+        if (isNaN(displayValue)) return;
 
-    if (firstOperand !== 0 && secondOperand !== 0) {
-        firstOperand = operate(firstOperand, secondOperand, operator);
-        secondOperand = 0;
-        display.textContent = firstOperand.toString();
-    }
-};
+        if (firstOperand === "") {
+            firstOperand = displayValue;
+            operator = button.textContent;
+        } else {
+            secondOperand = displayValue;
+            firstOperand = operate(firstOperand, secondOperand, operator);
+            updateDisplayText(firstOperand.toString());
+            operator = button.textContent;
+        }
 
-
-equalsButton.addEventListener('click', e => {
-    console.log('**** In equals ****');
-    assignDisplayToOperands();
-
-    if (secondOperand === 0) display.textContent = firstOperand;
-    else display.textContent = operate(firstOperand, secondOperand, operator);
-
-    e.preventDefault();
+        resetDisplay = true;
+        e.stopPropagation();
+    });
 });
 
-clearButton.addEventListener('click', e => {
-    firstOperand = 0;
-    secondOperand = 0;
+equalsButton.addEventListener("click", (e) => {
+    if (firstOperand === "") return;
+
+    displayValue = getDisplayValue(displayText);
+    secondOperand = displayValue;
+    let result = operate(firstOperand, secondOperand, operator);
+    updateDisplayText(result.toString());
+
+    e.stopPropagation();
+});
+
+clearButton.addEventListener("click", (e) => {
+    firstOperand = "";
+    secondOperand = "";
     operator = "";
-    displayValue = "";
+
+    displayText = "";
+    displayValue = 0;
+
+    resetDisplay = false;
+
     display.textContent = "";
 });
