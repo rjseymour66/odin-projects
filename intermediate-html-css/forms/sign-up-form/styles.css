@@ -84,7 +84,9 @@ svg {
   --fw-regular: 400;
   --fw-bold: 700;
 
-  --clr-primary: #326129;
+  --clr-primary: #596d48;
+
+  --clr-form-border: #e5e7eb;
   --clr-form-invalid: #fc0303;
   --clr-form-focus: #0a038a;
 
@@ -125,7 +127,7 @@ em {
   background-color: #fff;
 }
 
-/**************** inside containers ****************/
+/**************** form inside containers ****************/
 
 .form-intro-container {
   padding: 10rem 7rem 4rem var(--padding-left);
@@ -197,7 +199,7 @@ em {
 .form-group > input {
   width: 100%;
 
-  border: 1px solid lightgray;
+  border: 1px solid var(--clr-form-border);
   border-radius: var(--border-radius);
   padding: 0.25rem 0.5rem;
 }
@@ -227,4 +229,39 @@ em {
   font-weight: var(--fw-bold);
   text-decoration: none;
   color: var(--clr-primary);
+}
+
+/**************** IMAGE COLUMN ****************/
+
+@font-face {
+  font-family: "Norse";
+  src: url("./assets/fonts/Norse-Bold.otf");
+  font-weight: bold;
+  font-style: normal;
+}
+.logo-container {
+  position: relative;
+  background-color: #000;
+  padding: 1rem 0;
+
+  opacity: 0.6;
+  top: 200px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  position: relative;
+  height: auto;
+  max-width: 100px;
+  flex-shrink: 0;
+}
+
+.logo-container > p {
+  font-family: "Norse";
+
+  font-size: 6rem;
+  color: #fff;
+  align-self: center;
 }
