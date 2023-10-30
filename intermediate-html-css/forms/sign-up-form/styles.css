@@ -89,6 +89,8 @@ svg {
   --clr-form-focus: #0a038a;
 
   --border-radius: 7px;
+
+  --padding-left: 3rem;
 }
 
 body {
@@ -97,11 +99,15 @@ body {
   background-color: #000;
 }
 
+em {
+  font-style: italic;
+}
+
 /* PROJECT STYLES */
 
 /* main container layout */
 
-.container {
+.main-container {
   height: 100vh;
   max-width: var(--max-width);
   margin: 0 auto;
@@ -116,60 +122,57 @@ body {
 
 .form-col {
   width: 60%;
-
-  /* center all sections */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
   background-color: #fff;
 }
 
-.form-container {
-  max-width: var(--form-max-width);
-  border: 3px solid red;
+/**************** inside containers ****************/
+
+.form-intro-container {
+  padding: 10rem 7rem 4rem var(--padding-left);
 }
 
-/* form-col layout */
-
-.form-col .intro {
-  background-color: lightgray;
+.form-intro-container > * + * {
+  margin-top: 2rem;
 }
 
-.form-col .form {
-  /* box-shadow: h-shadow v-shadow blur spread color inset; */
-  box-shadow: 0 15px 10px -18px gray;
+.form-body-container {
+  padding: 2rem var(--padding-left);
+}
+
+.cta-container {
+  padding: 2rem 0 10rem var(--padding-left);
+}
+
+.cta-container > * + * {
+  margin-top: 2rem;
 }
 
 /**************** form intro layout ****************/
 
-.intro {
+.form-intro {
+  /* outline: 1px solid blue; */
+
   font-size: var(--fs-primary);
   font-weight: var(--fw-regular);
 
-  margin: 3rem 0;
-
-  border: 1px solid blue;
+  background-color: rgb(245, 245, 245);
 }
 
 /* margin btwn paras */
-.intro > p + p {
+.form-intro > p + p {
   margin-top: 2rem;
 }
 
-.intro > p > em {
-  font-style: italic;
-}
-/**************** form layout ****************/
+/**************** form body layout ****************/
 
-.form-section {
-  border: 1px solid orange;
+.form-body {
+  /* outline: 1px solid orange; */
 
-  margin: 3rem 0;
+  /* box-shadow: h-shadow v-shadow blur spread color inset; */
+  box-shadow: 0 15px 10px -18px gray;
 }
 
-.form-section > h2 {
+.form-body h2 {
   font-size: var(--fs-primary);
   font-weight: var(--fw-regular);
 }
@@ -202,13 +205,7 @@ body {
 /**************** CTA section ****************/
 
 .cta-section {
-  border: 1px solid green;
-
-  margin: 3rem 0;
-}
-
-.cta-section > * + * {
-  margin-top: 2rem;
+  /* outline: 1px solid green; */
 }
 
 .cta-btn {
@@ -218,7 +215,7 @@ body {
   color: #fff;
   border: none;
 
-  padding: 0.75rem 3rem;
+  padding: 0.75rem 2.5rem;
   border-radius: var(--border-radius);
 }
 
