@@ -99,7 +99,7 @@ svg {
 body {
   font-family: var(--ff-primary);
 
-  background-color: #000;
+  /* background-color: #000; */
 }
 
 em {
@@ -112,7 +112,7 @@ em {
 
 .main-container {
   height: 100vh;
-  max-width: var(--max-width);
+  /* max-width: var(--max-width); */
   margin: 0 auto;
   display: flex;
   flex-direction: row;
