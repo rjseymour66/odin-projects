@@ -12,62 +12,98 @@
 <body>
 
     <div class="container">
-        <!-- sidebar section -->
-        <aside class="sidebar">
-            <div class="sidebar-heading">
-                <img src="assets/icons/dashboard.svg" alt="" class="dashboard-icon">
-                <h1 class="heading-text">Dashboard</h1>
-            </div>
-            <ul class="menu">
-                <li class="menu-item"><img src="assets/icons/home.svg" class="icon"></img>Home</li>
-                <li class="menu-item"><img src="assets/icons/profile.svg" class="icon"></img>Profile</li>
-                <li class="menu-item"><img src="assets/icons/messages.svg" class="icon"></img>Messages</li>
-                <li class="menu-item"><img src="assets/icons/history.svg" class="icon"></img>History</li>
-                <li class="menu-item"><img src="assets/icons/tasks.svg" class="icon"></img>Tasks</li>
-                <li class="menu-item"><img src="assets/icons/communities.svg" class="icon"></img>Communities</li>
-            </ul>
-            <ul class="options">
-                <li class="option-item"><img src="assets/icons/settings.svg" class="icon"></img>Settings</li>
-                <li class="option-item"><img src="assets/icons/support.svg" class="icon"></img>Support</li>
-                <li class="option-item"><img src="assets/icons/privacy.svg" class="icon"></img>Privacy</li>
-            </ul>
-        </aside>
-
 
         <!-- header -->
         <header class="header-container">
             <div class="user-info">
+                <img src="/assets/icons/magnify.svg" class="icon" alt="">
                 <input type="search" name="search" id="search-bar">
-                <span class="bell-icon"></span>
-                <span class="user-avatar"></span>
-                <span class="user-name">Morgan Oakley</span>
+                <img src="/assets/icons/bell.svg" class="icon" alt="">
+                <img src="/assets/avatars/cat.png" class="avatar-sm" alt="">
+                <h2 class="user-name">Morgan Oakley</h2>
             </div>
             <div class="user-actions">
-                <div class="user-avatar-lg"></div>
-                <div class="greeting">
-                    <span class="greeting-intro">Hi there,</span>
-                    <span class="greeting-name">Morgan Oakley (@morgan)</span>
-                </div>
+                <img src="/assets/avatars/cat.png" class="avatar-lg" alt="">
+                <p class="greeting"><span>Hi there,</span>Morgan Oakley (@morgan)</p>
                 <div class="action-buttons">
-                    <button type="button">New</button>
-                    <button type="button">Upload</button>
-                    <button type="button">Share</button>
+                    <button class="btn" type="button">New</button>
+                    <button class="btn" type="button">Upload</button>
+                    <button class="btn" type="button">Share</button>
                 </div>
             </div>
         </header>
+
+
+
+
+        <!-- sidebar section -->
+        <aside class="sidebar">
+            <nav class="site-nav">
+                <div class="sidebar-heading">
+                    <img src="assets/icons/dashboard.svg" alt="" class="dashboard-icon">
+                    <h1 class="heading-text">Dashboard</h1>
+                </div>
+                <ul class="menu">
+                    <li class="menu-item">
+                        <img src="assets/icons/home.svg" class="icon">
+                        <a href="" class="menu-link">Home</a>
+                    </li>
+                    <li class="menu-item">
+                        <img src="assets/icons/profile.svg" class="icon">
+                        <a href="#" class="menu-link">Profile</a>
+                    </li>
+                    <li class="menu-item">
+                        <img src="assets/icons/messages.svg" class="icon">
+                        <a href="" class="menu-link">Messages</a>
+                    </li>
+                    <li class="menu-item">
+                        <img src="assets/icons/history.svg" class="icon">
+                        <a href="" class="menu-link">History</a>
+                    </li>
+                    <li class="menu-item">
+                        <img src="assets/icons/tasks.svg" class="icon">
+                        <a href="" class="menu-link">Tasks</a>
+                    </li>
+                    <li class="menu-item">
+                        <img src="assets/icons/communities.svg" class="icon">
+                        <a href="" class="menu-link">Communities</a>
+                    </li>
+                </ul>
+                <ul class="options">
+                    <li class="menu-item">
+                        <img src="assets/icons/settings.svg" class="icon">
+                        <a href="" class="menu-link">Settings</a>
+                    </li>
+                    <li class="menu-item">
+                        <img src="assets/icons/support.svg" class="icon">
+                        <a href="" class="menu-link">Support</a>
+                    </li>
+                    <li class="menu-item">
+                        <img src="assets/icons/privacy.svg" class="icon">
+                        <a href="" class="menu-link">Privacy</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+
+
+
+
+
         <!-- Your projects -->
         <main class="main-container">
             <div class="projects">
-                <h2>Your Projects</h2>
+                <h2 class="section-heading">Your Projects</h2>
                 <div class="project-card">
                     <h2>Super Cool Project</h2>
                     <p>Sed tempus ut lacus ut scelerisque. Suspendisse sollicitudin nibh erat, id facilisis felis
                         accumsan
                         nec.</p>
                     <div class="icon-row">
-                        <img src="" alt="">
-                        <img src="" alt="">
-                        <img src="" alt="">
+                        <img class="icon" src="/assets/icons/star.svg" alt="">
+                        <img class="icon" src="/assets/icons/eye.svg" alt="">
+                        <img class="icon" src="/assets/icons/share.svg" alt="">
                     </div>
                 </div>
                 <div class="project-card">
@@ -76,18 +112,18 @@
                         sapien et, facilisis dolor. Duis sem purus, dignissim ut sapien in, varius pellentesque lacus.
                     </p>
                     <div class="icon-row">
-                        <img src="" alt="">
-                        <img src="" alt="">
-                        <img src="" alt="">
+                        <img class="icon" src="/assets/icons/star.svg" alt="">
+                        <img class="icon" src="/assets/icons/eye.svg" alt="">
+                        <img class="icon" src="/assets/icons/share.svg" alt="">
                     </div>
                 </div>
                 <div class="project-card">
                     <h2>Impossible App</h2>
                     <p>In hac habitasse platea dictumst. Vivamus dictum rutrum arcu, a placerat velit sagittis id.</p>
                     <div class="icon-row">
-                        <img src="" alt="">
-                        <img src="" alt="">
-                        <img src="" alt="">
+                        <img class="icon" src="/assets/icons/star.svg" alt="">
+                        <img class="icon" src="/assets/icons/eye.svg" alt="">
+                        <img class="icon" src="/assets/icons/share.svg" alt="">
                     </div>
                 </div>
                 <div class="project-card">
@@ -96,9 +132,9 @@
                         Curabitur
                         dignissim nisi in tortor commodo, ac bibendum magna tincidunt.</p>
                     <div class="icon-row">
-                        <img src="" alt="">
-                        <img src="" alt="">
-                        <img src="" alt="">
+                        <img class="icon" src="/assets/icons/star.svg" alt="">
+                        <img class="icon" src="/assets/icons/eye.svg" alt="">
+                        <img class="icon" src="/assets/icons/share.svg" alt="">
                     </div>
                 </div>
                 <div class="project-card">
@@ -107,9 +143,9 @@
                         Aliquam
                         sed malesuadea eros.</p>
                     <div class="icon-row">
-                        <img src="" alt="">
-                        <img src="" alt="">
-                        <img src="" alt="">
+                        <img class="icon" src="/assets/icons/star.svg" alt="">
+                        <img class="icon" src="/assets/icons/eye.svg" alt="">
+                        <img class="icon" src="/assets/icons/share.svg" alt="">
                     </div>
                 </div>
                 <div class="project-card">
@@ -118,56 +154,68 @@
                         tortor
                         purus sit amet ex. Pellentesque mollis nec sem vel aliquam.</p>
                     <div class="icon-row">
-                        <img src="" alt="">
-                        <img src="" alt="">
-                        <img src="" alt="">
+                        <img class="icon" src="/assets/icons/star.svg" alt="">
+                        <img class="icon" src="/assets/icons/eye.svg" alt="">
+                        <img class="icon" src="/assets/icons/share.svg" alt="">
                     </div>
                 </div>
             </div>
-            <div class="announcements">
-                <h2>Announcements</h2>
-                <div class="announcement-card">
-                    <div class="announcement-text">
-                        <h3 class="announcement-heading">Site Maintenance</h3>
-                        <p class="announcement-text">Vestibulum condimentum tellus lacus, in accumsan elit mazimus ac.
-                            Donec
-                            hendrerit sodales congue...</p>
-                    </div>
-                    <div class="announcement-text">
-                        <h3 class="announcement-heading">Community Share Day</h3>
-                        <p class="announcement-text">Nam vel lectus tincidunt, rutrum nulla eu, ornare libero. Aliquam
-                            dictum accumsan porttitor...</p>
-                    </div>
-                    <div class="announcement-text">
-                        <h3 class="announcement-heading">Updated Privacy Policy</h3>
-                        <p class="announcement-text">Phasellus effictur nisi eget elit consectetur, eget condimentum
-                            ante
-                            auctor. Cras fringilla sagittis sem in mattis...</p>
+            <div class="main-aside">
+                <div class="announcements">
+                    <h2 class="section-heading">Announcements</h2>
+                    <div class="announcement-card">
+                        <div class="announcement-text">
+                            <h3 class="announcement-heading">Site Maintenance</h3>
+                            <p class="announcement-text">Vestibulum condimentum tellus lacus, in accumsan elit mazimus
+                                ac.
+                                Donec
+                                hendrerit sodales congue...</p>
+                        </div>
+                        <div class="announcement-text">
+                            <h3 class="announcement-heading">Community Share Day</h3>
+                            <p class="announcement-text">Nam vel lectus tincidunt, rutrum nulla eu, ornare libero.
+                                Aliquam
+                                dictum accumsan porttitor...</p>
+                        </div>
+                        <div class="announcement-text">
+                            <h3 class="announcement-heading">Updated Privacy Policy</h3>
+                            <p class="announcement-text">Phasellus effictur nisi eget elit consectetur, eget condimentum
+                                ante
+                                auctor. Cras fringilla sagittis sem in mattis...</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="trending">
-                <h2></h2>
-                <div class="trending-card">
-                    <div class="trending-row">
-                        <img src="" alt="">
-                        <span class="user-name">@tegan</span>
-                        <span class="project-description">World Peace Builder</span>
-                    </div>
-                    <div class="trending-row">
-                        <img src="" alt="">
-                        <span class="user-name">@morgan</span>
-                        <span class="project-description">Super Col Project</span>
-                    </div>
-                    <div class="trending-row">
-                        <img src="" alt="">
-                        <span class="user-name">@kendall</span>
-                        <span class="project-description">Life Changing App</span>
-                    </div>
-                    <div class="trending-row">
-                        <img src="" alt="">
-                        <span class="user-name">@alex</span>
-                        <span class="project-description">No Traffic Maker</span>
+                <div class="trending">
+                    <h2 class="section-heading">Trending</h2>
+                    <div class="trending-card">
+                        <div class="trending-row">
+                            <img src="/assets/avatars/cat.png" class="avatar-sm" alt="">
+                            <div class="trending-text">
+                                <p class="user-name">@tegan</p>
+                                <p class="project-description">World Peace Builder</p>
+                            </div>
+                        </div>
+                        <div class="trending-row">
+                            <img src="/assets/avatars/cat.png" class="avatar-sm" alt="">
+                            <div class="trending-text">
+                                <p class="user-name">@morgan</p>
+                                <p class="project-description">Super Col Project</p>
+                            </div>
+                        </div>
+                        <div class="trending-row">
+                            <img src="/assets/avatars/cat.png" class="avatar-sm" alt="">
+                            <div class="trending-text">
+                                <p class="user-name">@kendall</p>
+                                <p class="project-description">Life Changing App</p>
+                            </div>
+                        </div>
+                        <div class="trending-row">
+                            <img src="/assets/avatars/cat.png" class="avatar-sm" alt="">
+                            <div class="trending-text">
+                                <p class="user-name">@alex</p>
+                                <p class="project-description">No Traffic Maker</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
