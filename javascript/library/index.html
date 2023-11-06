@@ -14,11 +14,11 @@
 
     <header class="header">
         <div class="header-contents">
-            <h1 class="header-text">JS library</h1>
-            <button class="add-book">Add book</button>
+            <h1 class="header-text">JS Library</h1>
+            <button type="custom" class="add-book btn">Add Book</button>
         </div>
     </header>
-    <div id="root">
+    <div id="root" class="container">
         <table>
             <thead>
                 <tr>
@@ -34,6 +34,29 @@
 
     </div>
 
+    <dialog class="modal">
+        <h2>Add a book</h2>
+        <div>
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title">
+        </div>
+
+        <div>
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author">
+        </div>
+
+        <div>
+            <label for="pages">Number of pages</label>
+            <input type="tel" name="pages" id="pages">
+        </div>
+
+        <div class="checkbox">
+            <label for="read">Read?</label>
+            <input type="checkbox" name="read" id="read">
+        </div>
+        <button class="close-modal">Done</button>
+    </dialog>
 
 </body>
 

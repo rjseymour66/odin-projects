@@ -1,5 +1,7 @@
-const root = document.querySelector('#root');
 const tableBody = document.querySelector('tbody');
+const modal = document.querySelector('.modal');
+const addBook = document.querySelector('.add-book');
+const closeModal = document.querySelector('.close-modal');
 
 
 
@@ -16,6 +18,7 @@ const myLibrary = [
         "numberOfPages": 400,
         "read": true,
     },
+
 ];
 
 function Book(title, author, numberOfPages, read) {
@@ -32,7 +35,6 @@ function addBookToLibrary() {
 
 // loops through array and displays book on screen
 let renderBooks = () => {
-
     // for each item in myLibrary
     myLibrary.forEach(book => {
         // create a table row
@@ -57,3 +59,21 @@ let resetUI = () => {
         tableBody.removeChild(tableBody.firstChild);
     }
 };
+
+addBook.addEventListener('click', () => {
+    modal.showModal();
+});
+
+
+
+modal.addEventListener("click", e => {
+    const dialogDimensions = modal.getBoundingClientRect();
+    if (
+        e.clientX < dialogDimensions.left ||
+        e.clientX > dialogDimensions.right ||
+        e.clientY < dialogDimensions.top ||
+        e.clientY > dialogDimensions.bottom
+    ) {
+        modal.close();
+    }
+});

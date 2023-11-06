@@ -89,10 +89,143 @@ textarea {
 :root {
   --font-size: 1em;
   --ff-primary: "Rubik", sans-serif;
+
+  --fw-bold: 700;
+
+  --clr-primary: #2563eb;
+  --clr-bg: #eff6ff;
+
+  --max-width: 900px;
+  --side-padding: 1rem;
+  --page-width: min(var(--max-width), 100% - var(--side-padding) * 2);
 }
 
 body {
   font-family: var(--ff-primary);
+  background-color: var(--clr-bg);
 }
 
 /***************** Header *****************/
+
+.header {
+  background-color: var(--clr-primary);
+  padding: 1rem 0;
+  box-shadow: 0px 11px 8px -7px gray;
+}
+
+.header-contents {
+  width: var(--page-width);
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+}
+
+.header-text {
+  font-size: 2.5rem;
+  color: #fff;
+  font-weight: var(--fw-bold);
+  font-style: italic;
+}
+
+.add-book {
+  background-color: var(--clr-primary);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: var(--fw-bold);
+
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+  margin-left: auto;
+  border: 2px solid #fff;
+}
+
+.add-book:hover {
+  background-color: #fff;
+  color: var(--clr-primary);
+  cursor: pointer;
+}
+
+/***************** Main container *****************/
+
+.container {
+  width: var(--page-width);
+  margin: 2rem auto 0 auto;
+}
+
+/***************** Table *****************/
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  font-size: 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid #000;
+}
+
+td,
+th {
+  /* border: 1px solid black; */
+  padding: 0.5rem;
+}
+
+/***************** Modal *****************/
+.modal {
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+
+  padding: 3rem;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal h2 {
+  font-size: 2rem;
+  font-weight: var(--fw-bold);
+  color: var(--clr-primary);
+}
+
+/* checkbox */
+
+input[type="checkbox"] {
+  appearance: none;
+}
+
+input[type="checkbox"] {
+  position: relative;
+  width: 1em;
+  height: 1em;
+  border: 1px solid gray;
+  /* Adjusts the position of the checkboxes on the text baseline */
+  vertical-align: -2px;
+  /* Set here so that Windows' High-Contrast Mode can override */
+  color: green;
+}
+
+input[type="checkbox"]::before {
+  content: "✔";
+  position: absolute;
+  font-size: 1.2em;
+  right: -1px;
+  top: -0.3em;
+  visibility: hidden;
+}
+
+input[type="checkbox"]:checked::before {
+  /* Use `visibility` instead of `display` to avoid recalculating layout */
+  visibility: visible;
+}
+
+input[type="checkbox"]:disabled {
+  border-color: black;
+  background: #ddd;
+  color: gray;
+}
