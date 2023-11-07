@@ -3,6 +3,10 @@ const modal = document.querySelector('.modal');
 const addBook = document.querySelector('.add-book');
 const closeModal = document.querySelector('.close-modal');
 
+const newTitle = document.querySelector('#title');
+const newAuthor = document.querySelector('#author');
+const newPages = document.querySelector('#pages');
+
 
 
 const myLibrary = [
@@ -29,12 +33,15 @@ function Book(title, author, numberOfPages, read) {
 }
 
 // take users input and store new book objects in myLibrary
-function addBookToLibrary() {
+function addBookToLibrary(book) {
     // add book
+    myLibrary.push(book);
+
 }
 
 // loops through array and displays book on screen
 let renderBooks = () => {
+    resetUI();
     // for each item in myLibrary
     myLibrary.forEach(book => {
         // create a table row
@@ -51,7 +58,7 @@ let renderBooks = () => {
     });
 };
 
-renderBooks();
+// renderBooks();
 
 // deletes all books from the screen before rendering again
 let resetUI = () => {
@@ -62,6 +69,12 @@ let resetUI = () => {
 
 addBook.addEventListener('click', () => {
     modal.showModal();
+
+
+    newTitle.value = "";
+    newAuthor.value = "";
+    newPages.value = "";
+
 });
 
 
@@ -77,3 +90,24 @@ modal.addEventListener("click", e => {
         modal.close();
     }
 });
+
+closeModal.addEventListener('click', e => {
+
+    let title = newTitle.value;
+    let author = newAuthor.value;
+    let pagesStr = newPages.value;
+    pages = parseInt(pagesStr);
+
+    let read = false;
+
+    // check if any are empty in form
+
+    let book = new Book(title, author, pages, read);
+    addBookToLibrary(book);
+    renderBooks();
+
+    e.preventDefault();
+    modal.close();
+});
+
+// modal.showModal();

@@ -178,8 +178,10 @@ th {
   left: 50%;
   translate: -50% -50%;
 
-  padding: 3rem;
-  border: 1px solid black;
+  height: 60%;
+  width: 40%;
+  padding: 2rem;
+  border: none;
   border-radius: 5px;
 }
 
@@ -193,9 +195,57 @@ th {
   color: var(--clr-primary);
 }
 
+/***************** Form *****************/
+
+.form {
+  /* border: 1px solid red; */
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+}
+
+.form-row > input[type="text"],
+.form-row > input[type="tel"] {
+  /* border: 1px solid #93c5fd; */
+  border: none;
+  width: 70%;
+  background-color: #dbeafe;
+
+  padding: 0.5rem 0.5rem;
+  border-radius: 5px;
+}
+
+.form-row > input[type="text"]:focus,
+.form-row > input[type="tel"]:focus {
+  outline: 2px solid #60a5fa;
+}
+
+/* button */
+
+.close-modal {
+  background-color: var(--clr-primary);
+  color: #fff;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: var(--fw-bold);
+
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+}
+
+.close-modal:hover {
+  background-color: #fff;
+  color: var(--clr-primary);
+  cursor: pointer;
+  outline: 2px solid var(--clr-primary);
+}
+
 /* checkbox */
 
-input[type="checkbox"] {
+/* input[type="checkbox"] {
   appearance: none;
 }
 
@@ -204,9 +254,9 @@ input[type="checkbox"] {
   width: 1em;
   height: 1em;
   border: 1px solid gray;
-  /* Adjusts the position of the checkboxes on the text baseline */
+  Adjusts the position of the checkboxes on the text baseline
   vertical-align: -2px;
-  /* Set here so that Windows' High-Contrast Mode can override */
+  Set here so that Windows' High-Contrast Mode can override
   color: green;
 }
 
@@ -220,7 +270,7 @@ input[type="checkbox"]::before {
 }
 
 input[type="checkbox"]:checked::before {
-  /* Use `visibility` instead of `display` to avoid recalculating layout */
+  Use `visibility` instead of `display` to avoid recalculating layout
   visibility: visible;
 }
 
@@ -228,4 +278,4 @@ input[type="checkbox"]:disabled {
   border-color: black;
   background: #ddd;
   color: gray;
-}
+} */
