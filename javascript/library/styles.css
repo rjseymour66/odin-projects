@@ -94,6 +94,8 @@ textarea {
 
   --clr-primary: #2563eb;
   --clr-bg: #eff6ff;
+  --clr-form-border: #60a5fa;
+  --clr-form-input-bg: #dbeafe;
 
   --max-width: 900px;
   --side-padding: 1rem;
@@ -193,13 +195,43 @@ th {
   font-size: 2rem;
   font-weight: var(--fw-bold);
   color: var(--clr-primary);
+
+  /* border: 1px solid red; */
+}
+
+.modal-close {
+  position: absolute;
+
+  top: 0.3rem;
+  right: 0.3rem;
+
+  padding: 1.75rem;
+  border: none;
+  height: 1rem;
+  width: 1rem;
+
+  text-indent: 10em;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.modal-close::after {
+  position: absolute;
+  line-height: 0.5;
+  top: 0.5rem;
+  right: 0.5rem;
+  text-indent: 0;
+  font-size: 2.5rem;
+  cursor: pointer;
+
+  background-color: var(--clr-form-input-bg);
+  border-radius: 50%;
+  padding: 0.5rem;
+
+  content: "\00d7";
 }
 
 /***************** Form *****************/
-
-.form {
-  /* border: 1px solid red; */
-}
 
 .form-row {
   display: flex;
@@ -211,8 +243,8 @@ th {
 .form-row > input[type="tel"] {
   /* border: 1px solid #93c5fd; */
   border: none;
-  width: 70%;
-  background-color: #dbeafe;
+  width: 100%;
+  background-color: var(--clr-form-input-bg);
 
   padding: 0.5rem 0.5rem;
   border-radius: 5px;
@@ -220,12 +252,12 @@ th {
 
 .form-row > input[type="text"]:focus,
 .form-row > input[type="tel"]:focus {
-  outline: 2px solid #60a5fa;
+  outline: 2px solid var(--clr-form-border);
 }
 
 /* button */
 
-.close-modal {
+.submit-modal-form {
   background-color: var(--clr-primary);
   color: #fff;
   border: none;
@@ -234,9 +266,11 @@ th {
 
   padding: 0.5rem 1.5rem;
   border-radius: 5px;
+
+  justify-self: end;
 }
 
-.close-modal:hover {
+.submit-modal-form:hover {
   background-color: #fff;
   color: var(--clr-primary);
   cursor: pointer;
@@ -245,37 +279,59 @@ th {
 
 /* checkbox */
 
-/* input[type="checkbox"] {
+/* .checkbox {
+  border: 1px solid red;
+} */
+
+.form-row.checkbox {
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+input[type="checkbox"] {
   appearance: none;
 }
 
 input[type="checkbox"] {
   position: relative;
-  width: 1em;
-  height: 1em;
-  border: 1px solid gray;
-  Adjusts the position of the checkboxes on the text baseline
-  vertical-align: -2px;
-  Set here so that Windows' High-Contrast Mode can override
-  color: green;
+  width: 1.25rem;
+  height: 1.25rem;
+  align-self: center;
+
+  border: 2px solid var(--clr-form-border);
+  border-radius: 50%;
+
+  color: var(--clr-primary);
 }
 
 input[type="checkbox"]::before {
-  content: "✔";
+  /* content: "✔"; */
+
+  content: " ";
+  background-color: var(--clr-form-border);
+  height: 0.9rem;
+  width: 0.9rem;
+  /* color: blue; */
   position: absolute;
-  font-size: 1.2em;
-  right: -1px;
-  top: -0.3em;
+  font-size: 1.5rem;
+
+  border-radius: 50%;
+
+  right: 1px;
+  top: 1px;
+
+  /* right: -5px;
+  top: -10px; */
+
   visibility: hidden;
 }
 
 input[type="checkbox"]:checked::before {
-  Use `visibility` instead of `display` to avoid recalculating layout
+  /* Use `visibility` instead of `display` to avoid recalculating layout */
   visibility: visible;
 }
 
 input[type="checkbox"]:disabled {
-  border-color: black;
-  background: #ddd;
-  color: gray;
-} */
+  border-color: gray;
+  background: var(--clr-form-input-bg);
+}

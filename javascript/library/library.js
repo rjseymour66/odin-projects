@@ -1,7 +1,8 @@
 const tableBody = document.querySelector('tbody');
 const modal = document.querySelector('.modal');
+const closeModal = document.querySelector('.modal-close');
 const addBook = document.querySelector('.add-book');
-const closeModal = document.querySelector('.close-modal');
+const submitModal = document.querySelector('.submit-modal-form');
 
 const newTitle = document.querySelector('#title');
 const newAuthor = document.querySelector('#author');
@@ -69,29 +70,10 @@ let resetUI = () => {
 
 addBook.addEventListener('click', () => {
     modal.showModal();
-
-
-    newTitle.value = "";
-    newAuthor.value = "";
-    newPages.value = "";
-
+    resetModalInputs();
 });
 
-
-
-modal.addEventListener("click", e => {
-    const dialogDimensions = modal.getBoundingClientRect();
-    if (
-        e.clientX < dialogDimensions.left ||
-        e.clientX > dialogDimensions.right ||
-        e.clientY < dialogDimensions.top ||
-        e.clientY > dialogDimensions.bottom
-    ) {
-        modal.close();
-    }
-});
-
-closeModal.addEventListener('click', e => {
+submitModal.addEventListener('click', e => {
 
     let title = newTitle.value;
     let author = newAuthor.value;
@@ -110,4 +92,28 @@ closeModal.addEventListener('click', e => {
     modal.close();
 });
 
-// modal.showModal();
+let resetModalInputs = () => {
+    newTitle.value = "";
+    newAuthor.value = "";
+    newPages.value = "";
+};
+
+closeModal.addEventListener('click', () => {
+    modal.close();
+});
+
+
+
+modal.addEventListener("click", e => {
+    const dialogDimensions = modal.getBoundingClientRect();
+    if (
+        e.clientX < dialogDimensions.left ||
+        e.clientX > dialogDimensions.right ||
+        e.clientY < dialogDimensions.top ||
+        e.clientY > dialogDimensions.bottom
+    ) {
+        modal.close();
+    }
+});
+
+modal.showModal();
