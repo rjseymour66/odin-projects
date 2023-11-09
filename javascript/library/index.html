@@ -24,13 +24,51 @@
                 <tr>
                     <th>Title</th>
                     <th>Author</th>
-                    <th>Pages</th>
-                    <th>Read</th>
+                    <th class="centered">Pages</th>
+                    <th class="centered">Read</th>
+                    <th></th>
                 </tr>
             <tbody>
             </tbody>
             </thead>
         </table>
+
+
+        <!-- <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th class="centered">Pages</th>
+                    <th class="centered">Read</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Harry Potter</td>
+                    <td>J.K. Rowling</td>
+                    <td class="centered">250</td>
+                    <td class="centered"><input type="checkbox" name="read" id="read"></td>
+                    <td class="read-cell centered" data-row="0"><img src="/assets/delete.svg"></td>
+                </tr>
+                <tr>
+                    <td>Grapes of Wrath</td>
+                    <td>John Steinbeck</td>
+                    <td class="centered">400</td>
+                    <td class="centered"><input type="checkbox" name="read" id="read"></td>
+                    <td class="read-cell centered" data-row="1"><img src="/assets/delete.svg"></td>
+                </tr>
+                <tr>
+                    <td>test</td>
+                    <td>tester</td>
+                    <td class="centered">432</td>
+                    <td class="centered"><input type="checkbox" name="read" id="read"></td>
+                    <td class="read-cell centered" data-row="2"><img src="/assets/delete.svg"></td>
+                </tr>
+            </tbody>
+
+        </table> -->
 
     </div>
 
@@ -55,7 +93,7 @@
                 <input type="tel" name="pages" id="pages">
             </div>
             <div class="form-row checkbox">
-                <input type="checkbox" name="read" id="read" checked>
+                <input type="checkbox" name="read" id="read">
                 <label for="read">Read?</label>
             </div>
             <button formmethod="dialog" class="submit-modal-form btn">Add Book</button>
