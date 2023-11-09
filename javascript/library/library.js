@@ -12,18 +12,18 @@ const checkbox = document.querySelector('#read');
 
 
 const myLibrary = [
-    {
-        "title": "Harry Potter",
-        "author": "J.K. Rowling",
-        "numberOfPages": 250,
-        "read": false,
-    },
-    {
-        "title": "Grapes of Wrath",
-        "author": "John Steinbeck",
-        "numberOfPages": 400,
-        "read": true,
-    },
+    // {
+    //     "title": "Harry Potter",
+    //     "author": "J.K. Rowling",
+    //     "numberOfPages": 250,
+    //     "read": false,
+    // },
+    // {
+    //     "title": "Grapes of Wrath",
+    //     "author": "John Steinbeck",
+    //     "numberOfPages": 400,
+    //     "read": true,
+    // },
 
 ];
 
@@ -133,6 +133,7 @@ let resetModalInputs = () => {
     newTitle.value = "";
     newAuthor.value = "";
     newPages.value = "";
+    checkbox.checked = false;
 };
 
 closeModal.addEventListener('click', () => {
