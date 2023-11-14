@@ -1,31 +1,19 @@
-const tableBody = document.querySelector('tbody');
-const modal = document.querySelector('.modal');
-const closeModal = document.querySelector('.modal-close');
-const addBook = document.querySelector('.add-book');
-const submitModal = document.querySelector('.submit-modal-form');
+const tableBody = document.querySelector("tbody");
+const modal = document.querySelector(".modal");
+const closeModal = document.querySelector(".modal-close");
+const addBook = document.querySelector(".add-book");
+const submitModal = document.querySelector(".submit-modal-form");
 
-const newTitle = document.querySelector('#title');
-const newAuthor = document.querySelector('#author');
-const newPages = document.querySelector('#pages');
-const checkbox = document.querySelector('#read');
+const newTitle = document.querySelector("#title");
+const newAuthor = document.querySelector("#author");
+const newPages = document.querySelector("#pages");
+const checkbox = document.querySelector("#read");
 
+const readBtn = document.querySelector(".read-btn");
+const colorPrimary = "#2563eb";
+const colorBg = "#eff6ff";
 
-
-const myLibrary = [
-    // {
-    //     "title": "Harry Potter",
-    //     "author": "J.K. Rowling",
-    //     "numberOfPages": 250,
-    //     "read": false,
-    // },
-    // {
-    //     "title": "Grapes of Wrath",
-    //     "author": "John Steinbeck",
-    //     "numberOfPages": 400,
-    //     "read": true,
-    // },
-
-];
+const myLibrary = [];
 
 function Book(title, author, numberOfPages, read) {
     this.title = title;
@@ -40,48 +28,46 @@ function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
-
 // loops through array and displays book on screen
 let renderBooks = () => {
     resetUI();
+
     // for each item in myLibrary
     myLibrary.forEach((book, index) => {
         // create a table row
-        const tr = document.createElement('tr');
+        const tr = document.createElement("tr");
 
         // create a td for each property in the book
         for (const value of Object.values(book)) {
-            const td = document.createElement('td');
+            const td = document.createElement("td");
 
-            let checkbox = document.createElement('input');
-            checkbox.type = "checkbox";
-            checkbox.name = "read";
-            checkbox.id = "read";
+            let readButton = createReadButton();
 
             if (value === true) {
-                checkbox.checked = true;
-                td.appendChild(checkbox);
-                td.classList.add('centered');
+                readButton.textContent = "Read";
+                readButton.style.backgroundColor = colorPrimary;
+                td.appendChild(readButton);
+                td.classList.add("centered");
             } else if (value === false) {
-                td.appendChild(checkbox);
-                td.classList.add('centered');
+                readButton.textContent = "Unread";
+                readButton.style.backgroundColor = "red";
+                td.appendChild(readButton);
+                td.classList.add("centered");
             } else if (typeof value === "number") {
                 td.textContent = `${value}`;
-                td.classList.add('centered');
+                td.classList.add("centered");
             } else {
                 td.textContent = `${value}`;
             }
             tr.appendChild(td);
         }
         // create delete icon
-        let deleteIcon = document.createElement('img');
+        let deleteIcon = document.createElement("img");
         deleteIcon.src = "/assets/delete.svg";
-        let deleteCell = document.createElement('td');
-        deleteCell.classList.add('read-cell', 'centered');
-        deleteCell.setAttribute('data-row', index);
-        deleteCell.addEventListener('click', e => {
-
-            console.log(e.target);
+        let deleteCell = document.createElement("td");
+        deleteCell.classList.add("read-cell", "centered");
+        deleteCell.setAttribute("data-row", index);
+        deleteCell.addEventListener("click", (e) => {
             tableCell = e.target.parentNode;
             tableRow = tableCell.parentNode;
             console.log(tableRow);
@@ -91,13 +77,27 @@ let renderBooks = () => {
         deleteCell.appendChild(deleteIcon);
         tr.appendChild(deleteCell);
 
-
         // append the tds to the table body
         tableBody.appendChild(tr);
     });
 };
 
-// renderBooks();
+let createReadButton = () => {
+    let readButton = document.createElement("button");
+    readButton.classList.add("read-btn");
+    readButton.setAttribute("type", "button");
+    readButton.setAttribute("id", "read-btn");
+    readButton.addEventListener("click", () => {
+        if (readButton.textContent === "Read") {
+            readButton.textContent = "Unread";
+            readButton.style.backgroundColor = "red";
+        } else if (readButton.textContent === "Unread") {
+            readButton.textContent = "Read";
+            readButton.style.backgroundColor = colorPrimary;
+        }
+    });
+    return readButton;
+};
 
 // deletes all books from the screen before rendering again
 let resetUI = () => {
@@ -106,26 +106,33 @@ let resetUI = () => {
     }
 };
 
-addBook.addEventListener('click', () => {
+addBook.addEventListener("click", () => {
     modal.showModal();
     resetModalInputs();
 });
 
-submitModal.addEventListener('click', e => {
-
+submitModal.addEventListener("click", (e) => {
     let title = newTitle.value;
     let author = newAuthor.value;
     let pagesStr = newPages.value;
     pages = parseInt(pagesStr);
 
+    console.log(pages);
+
     let read;
-    checkbox.checked ? read = true : read = false;
+    checkbox.checked ? (read = true) : (read = false);
+
+    if (title === "" || author === "" || isNaN(pages)) {
+        return;
+    }
 
     let book = new Book(title, author, pages, read);
     addBookToLibrary(book);
     renderBooks();
 
     e.preventDefault();
+    console.log(modal.returnValue);
+
     modal.close();
 });
 
@@ -136,22 +143,6 @@ let resetModalInputs = () => {
     checkbox.checked = false;
 };
 
-closeModal.addEventListener('click', () => {
+closeModal.addEventListener("click", () => {
     modal.close();
 });
-
-
-
-// modal.addEventListener("click", e => {
-//     const dialogDimensions = modal.getBoundingClientRect();
-//     if (
-//         e.clientX < dialogDimensions.left ||
-//         e.clientX > dialogDimensions.right ||
-//         e.clientY < dialogDimensions.top ||
-//         e.clientY > dialogDimensions.bottom
-//     ) {
-//         modal.close();
-//     }
-// });
-
-// modal.showModal();
