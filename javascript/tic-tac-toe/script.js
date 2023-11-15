@@ -63,5 +63,14 @@ let gameController = (playerOneName = "Player one", playerTwoName = "Player two"
 
     // func that returns active player
 
+    // log new round
+
+    // check for winner
+
+    // announce that player wins
+
+    // playround
+    //      get 
+
 
 };
