@@ -1,5 +1,4 @@
 let Square = () => {
-
     // default value for each Square
     let value = "";
 
@@ -30,7 +29,7 @@ let Gameboard = () => {
     // players marker in the Square
     const acceptPlayerMarker = (selectedSquare, playerMarker) => {
         // get list of empty Squares
-        const emptySquares = board.filter(square => square.getValue() === "");
+        const emptySquares = board.filter((square) => square.getValue() === "");
 
         // if no empty Squares, return
         if (!emptySquares.length) return;
@@ -42,7 +41,7 @@ let Gameboard = () => {
     // log current board to console
     const printBoard = () => {
         // create new array with Square values
-        const boardWithSquareVals = board.map(square => square.getValue());
+        const boardWithSquareVals = board.map((square) => square.getValue());
 
         // log board
         console.log(boardWithSquareVals);
@@ -51,26 +50,110 @@ let Gameboard = () => {
     return { getBoard, acceptPlayerMarker, printBoard };
 };
 
-let gameController = (playerOneName = "Player one", playerTwoName = "Player two") => {
+let gameController = (
+    playerOneName = "Player one",
+    playerTwoName = "Player two"
+) => {
     // create a new Gameboard
-    const newBoard = Gameboard();
+    const board = Gameboard();
 
     // create player objects with assigned markers
+    const players = [
+        { name: playerOneName, marker: "X" },
+        { name: playerTwoName, marker: "O" },
+    ];
 
     // assign active player
+    let activePlayer = players[0];
 
     // func that switches active player
+    const switchActivePlayer = () => {
+        activePlayer = activePlayer === players[0] ? players[1] : players[0];
+    };
 
     // func that returns active player
+    const getActivePlayer = () => activePlayer;
 
-    // log new round
+    // check for winner helper, returns Boolean
+    const checkForWinner = (gameBoard, playerMarker) => {
+        // get the board
+        const board = gameBoard.getBoard();
 
-    // check for winner
+        // define winning square conditions
+        const winConditions = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6],
+        ];
 
-    // announce that player wins
+        // get index for squares that contain the activePlayers marker
+        const getPlayerMarkerIndices = (board, marker) => {
+            let newArray = [];
+            board.forEach((el, index) => {
+                if (el === marker) {
+                    newArray.push(index);
+                }
+            });
+            return newArray;
+        };
 
-    // playround
-    //      get 
+        // check if getPlayerMarkerIndices() returns an array that contains every element in one of the winConditions array.
+        let indices = getPlayerMarkerIndices(board, playerMarker);
 
+        const isWinner = (nestedArray, indexArray) => {
+            for (const winningCombo of nestedArray) {
+                if (winningCombo.every((el) => indexArray.includes(el))) {
+                    return true;
+                }
+            }
+            return false;
+        };
 
+        return isWinner(winConditions, indices);
+    };
+
+    // announce that player wins helper
+    const playerWins = () => {
+        console.log(`${getActivePlayer().name} wins!`);
+    };
+
+    // start/log new round
+    const logNewRound = () => {
+        board.printBoard();
+        console.log(`${getActivePlayer().name}'s turn.`);
+    };
+
+    const getPlayerMove = () => prompt("Please enter a square:");
+
+    const playRound = (square) => {
+
+        console.log(
+            `Writing ${getActivePlayer().name}'s mark into square ${square}...`
+        );
+
+        addPlayerMarker(square, getActivePlayer().marker);
+
+        if (checkForWinner(board, getActivePlayer().marker)) {
+            playerWins();
+        }
+
+        console.log('No winner yet!');
+        switchActivePlayer();
+        logNewRound();
+    };
+
+    logNewRound();
+    let playerSelection = getPlayerMove();
+    playRound(playerSelection);
+
+    return { playRound, getActivePlayer };
 };
+
+const game = gameController()
+
+
