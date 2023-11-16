@@ -1,136 +1,184 @@
-let Gameboard = () => {
-    let board = [];
-
-    // add an empty cell into each array element
-    for (let i = 0; i < 9; i++) {
-        board[i] = Cell();
-    }
-
-    // get the current state of the game
-    const getBoard = () => board;
-
-    // adds a player's marker to the square
-    const writeMarker = (square, player) => {
-        // get list of empty cells
-        const emptyCells = board.filter((cell) => cell.value === "");
-
-        // if there are no empty cells, return
-        if (!emptyCells.length) return;
-
-        // if the cell is empty, writeMarker for the player
-        square.addPlayerMarker(player);
-    };
-
-    // see what the board looks like
-    const printBoard = () => {
-        // get values from each cell and populate a new array with the values
-        const boardWithCellValues = board.map((cell) => cell.getValue());
-        // print board
-        console.log(boardWithCellValues);
-    };
-
-    return { getBoard, writeMarker, printBoard };
-};
-
-// a cell is a
-let Cell = () => {
+let Square = () => {
+    // default value for each Square
     let value = "";
 
-    // change value of cell to players marker
-    const addPlayerMarker = (marker) => {
-        value = marker;
+    // change the value of the Square to a players marker
+    const addPlayerMarker = (playerMarker) => {
+        value = playerMarker;
     };
 
+    // get the value of the Square
     const getValue = () => value;
 
     return { addPlayerMarker, getValue };
 };
 
-let players = () => { };
+let Gameboard = () => {
+    // create board array
+    let board = [];
 
+    // create array with 9 elements, each element stores a Square
+    for (let i = 0; i < 9; i++) {
+        board[i] = Square();
+    }
 
-let gameController = (
-    playerOneName = "Player One",
-    playerTwoName = "Player Two"
+    // get current state of board
+    const getBoard = () => board;
+
+    // make sure the Square is empty and then write the
+    // players marker in the Square
+    const acceptPlayerMarker = (selectedSquare, playerMarker) => {
+        // get list of empty Squares
+        const emptySquares = board.filter((square) => square.getValue() === "");
+
+        // if no empty Squares, return
+        if (!emptySquares.length) return;
+
+        // if the Square is empty, add the player's marker
+        board[selectedSquare - 1].addPlayerMarker(playerMarker);
+    };
+
+    // log current board to console
+    const printBoard = () => {
+        // create new array with Square values
+        const boardWithSquareVals = board.map((square) => square.getValue());
+
+        // log board
+        console.log(boardWithSquareVals);
+    };
+
+    return { getBoard, acceptPlayerMarker, printBoard };
+};
+
+let GameController = (
+    playerOneName = "Player one",
+    playerTwoName = "Player two"
 ) => {
-    // build gameboard
+    // create a new Gameboard
     const board = Gameboard();
 
+    // create player objects with assigned markers
     const players = [
         { name: playerOneName, marker: "X" },
         { name: playerTwoName, marker: "O" },
     ];
 
+    // assign active player
     let activePlayer = players[0];
 
-    const switchPlayerTurn = () => {
+    // func that switches active player
+    const switchActivePlayer = () => {
         activePlayer = activePlayer === players[0] ? players[1] : players[0];
     };
 
+    // func that returns active player
     const getActivePlayer = () => activePlayer;
 
-    // const getPlayerInput = () => prompt();
-
-    // print the board to the console and list player turn
-    const printNewRound = () => {
-        board.printBoard();
-        console.log(`${getActivePlayer().name}'s turn.`);
-    };
-
+    // check for winner helper, returns Boolean
     const checkForWinner = (gameBoard, playerMarker) => {
+        // get the board
+        const board = gameBoard.getBoard();
 
-        let board = gameBoard.getBoard();
-
-        const playerCells = board.filter((cell) => cell.getValue() === playerMarker);
-
-        const winningCombos = [
-            [1, 2, 3],
-            [4, 5, 6],
-            [7, 8, 9],
+        // define winning square conditions
+        const winConditions = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
             [1, 4, 7],
             [2, 5, 8],
-            [3, 6, 9],
-            [1, 5, 9],
-            [3, 5, 7],
+            [0, 4, 8],
+            [2, 4, 6],
         ];
 
+        // get index for squares that contain the activePlayers marker
+        const getPlayerMarkerIndices = (board, marker) => {
+            let newArray = [];
+            board.forEach((el, index) => {
+                if (el === marker) {
+                    newArray.push(index);
+                }
+            });
+            return newArray;
+        };
 
-        let result = winningCombos.forEach(array => {
-            array.every(el => playerCells.includes(el));
-        });
+        // check if getPlayerMarkerIndices() returns an array that contains every element in one of the winConditions array.
+        let indices = getPlayerMarkerIndices(board, playerMarker);
+
+        const isWinner = (nestedArray, indexArray) => {
+            for (const winningCombo of nestedArray) {
+                if (winningCombo.every((el) => indexArray.includes(el))) {
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        result = isWinner(winConditions, indices);
 
         return result;
     };
 
-    const playerWins = () => {
+    // announce that player wins helper
+    const logPlayerWins = () => {
         console.log(`${getActivePlayer().name} wins!`);
     };
 
+    // start/log new round
+    const logNewRound = () => {
+        board.printBoard();
+        console.log(`${getActivePlayer().name}'s turn.`);
+    };
+
+    const getPlayerMove = () => prompt("Please enter a square:");
+
     const playRound = (square) => {
-        // add a marker for the current player
+
         console.log(
             `Writing ${getActivePlayer().name}'s mark into square ${square}...`
         );
-        board.writeMarker(square, getActivePlayer().marker);
 
-        // check winning combos
-        if (checkForWinner(board, activePlayer.marker)) {
-            playerWins();
-        } else {
-            console.log('No winners!');
-            switchPlayerTurn();
-            printNewRound();
+        board.acceptPlayerMarker(square, getActivePlayer().marker);
 
-        }
-        printNewRound();
+        // if (checkForWinner(board, getActivePlayer().marker)) {
+        //     logPlayerWins();
+        // }
+
+        switchActivePlayer();
+
     };
 
-    // Begin the game
-    printNewRound();
-    let playerSelection = getPlayerInput();
-    playRound(playerSelection);
+    const gameIsCats = (gameBoard) => {
+        const emptySquares = gameBoard.getBoard().filter((square) => square.getValue() === "");
 
-    return { playRound, getActivePlayer };
+        if (emptySquares.length === 0) {
+            return true;
+        }
+        return false;
+    };
+
+    const playGame = () => {
+        let playerMove;
+
+        while (true) {
+            if (gameIsCats(board)) {
+                console.log('The game is CATS!');
+                break;
+            }
+            logNewRound();
+            playerMove = getPlayerMove();
+            playRound(playerMove);
+
+            if (checkForWinner(board, getActivePlayer().marker)) {
+                logPlayerWins();
+                break;
+            }
+        }
+    };
+
+    return { playGame, playRound, getActivePlayer };
 };
 
-const game = gameController();
+
+const game = GameController();
+game.playGame();
