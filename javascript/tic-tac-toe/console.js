@@ -1,4 +1,4 @@
-let Square = () => {
+const Square = () => {
     // default value for each Square
     let value = "";
 
@@ -13,7 +13,7 @@ let Square = () => {
     return { addPlayerMarker, getValue };
 };
 
-let Gameboard = () => {
+const Gameboard = () => {
     // create board array
     let board = [];
 
@@ -34,8 +34,13 @@ let Gameboard = () => {
         // if no empty Squares, return
         if (!emptySquares.length) return;
 
+        // if there is already a value in that spot, return
+        if (board[selectedSquare - 1].getValue()) return;
+
         // if the Square is empty, add the player's marker
         board[selectedSquare - 1].addPlayerMarker(playerMarker);
+
+        return true;
     };
 
     // log current board to console
@@ -50,7 +55,7 @@ let Gameboard = () => {
     return { getBoard, acceptPlayerMarker, printBoard };
 };
 
-let GameController = (
+const GameController = (
     playerOneName = "Player one",
     playerTwoName = "Player two"
 ) => {
@@ -74,8 +79,8 @@ let GameController = (
     // func that returns active player
     const getActivePlayer = () => activePlayer;
 
-    // check for winner helper, returns Boolean
-    const checkForWinner = (gameBoard, playerMarker) => {
+    // check for winner helper, returns empty string or winner name
+    const getWinner = (gameBoard) => {
         // get the board
         const board = gameBoard.getBoard();
 
@@ -102,8 +107,11 @@ let GameController = (
             return newArray;
         };
 
-        // check if getPlayerMarkerIndices() returns an array that contains every element in one of the winConditions array.
-        let indices = getPlayerMarkerIndices(board, playerMarker);
+        // check if getPlayerMarkerIndices() returns an array that contains every
+        // element in one of the winConditions array.
+        let playerOneIndices = getPlayerMarkerIndices(board, players[0].marker);
+        let playerTwoIndices = getPlayerMarkerIndices(board, players[1].marker);
+        // let indices = getPlayerMarkerIndices(board, playerMarker);
 
         const isWinner = (nestedArray, indexArray) => {
             for (const winningCombo of nestedArray) {
@@ -114,20 +122,27 @@ let GameController = (
             return false;
         };
 
-        const result = isWinner(winConditions, indices);
+        let result = "";
+        if (isWinner(winConditions, playerOneIndices)) result = players[0].name;
+        if (isWinner(winConditions, playerTwoIndices)) result = players[1].name;
 
         return result;
     };
 
     // announce that player wins helper
-    const logPlayerWins = () => {
-        console.log(`${getActivePlayer().name} wins!`);
+    const logPlayerWins = (name) => {
+        console.log(`${name} wins!`);
+        alert(`${name} wins!`);
+    };
+
+    const logGameIsCats = () => {
+        console.log("The game is CATS!");
+        alert("The game is CATS!");
     };
 
     // start/log new round
-    const logNewRound = () => {
+    const logBoard = () => {
         board.printBoard();
-        console.log(`${getActivePlayer().name}'s turn.`);
     };
 
     const getPlayerMove = () => {
@@ -141,11 +156,28 @@ let GameController = (
     };
 
     const playRound = (square) => {
+        console.log(`${getActivePlayer().name}'s turn.`);
+        if (!board.acceptPlayerMarker(square, getActivePlayer().marker)) return;
         console.log(
             `Writing ${getActivePlayer().name}'s mark into square ${square}...`
         );
 
-        board.acceptPlayerMarker(square, getActivePlayer().marker);
+        logBoard();
+
+        // check for cats
+        if (gameIsCats(board)) {
+            logGameIsCats();
+            return;
+        }
+
+        // check for winner
+        let winner = getWinner(board);
+        if (winner) {
+            logPlayerWins(winner);
+            return;
+        }
+
+        switchActivePlayer();
     };
 
     const gameIsCats = (gameBoard) => {
@@ -161,22 +193,13 @@ let GameController = (
 
     // playGame is for the console version
     const playGame = () => {
+        logBoard();
         let playerMove;
 
         while (true) {
-            if (gameIsCats(board)) {
-                console.log("The game is CATS!");
-                break;
-            }
-            logNewRound();
             playerMove = getPlayerMove();
             playRound(playerMove);
-
-            if (checkForWinner(board, getActivePlayer().marker)) {
-                logPlayerWins();
-                break;
-            }
-            switchActivePlayer();
+            if (gameIsCats(board) || getWinner(board) !== "") return;
         }
     };
 
