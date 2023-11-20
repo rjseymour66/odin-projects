@@ -18,6 +18,22 @@ const Square = () => {
 };
 
 /////////////////////////////////////////////
+// Player
+/////////////////////////////////////////////
+
+const Player = (playerName, playerMarker) => {
+    const name = playerName;
+    marker = playerMarker;
+    isWinner = false;
+
+    const getName = () => name;
+    const getMarker = () => marker;
+    const setIsWinner = () => isWinner ? true : false;
+
+    return { getName, getMarker, setIsWinner };
+};
+
+/////////////////////////////////////////////
 // Gameboard
 /////////////////////////////////////////////
 
@@ -86,12 +102,10 @@ const GameController = (
         activePlayer = activePlayer === players[0] ? players[1] : players[0];
     };
 
-    // check for winner helper, returns empty string or winner name
-    const getWinner = (gameBoard) => {
-        // get the board
-        const board = gameBoard.getBoard();
+    const didPlayerJustWin = (gameBoard, currentPlayer) => {
+        // get current board
+        const curentBoard = gameBoard.getBoard();
 
-        // define winning square conditions
         const winConditions = [
             [0, 1, 2],
             [3, 4, 5],
@@ -114,11 +128,7 @@ const GameController = (
             return newArray;
         };
 
-        // check if getPlayerMarkerIndices() returns an array that contains every
-        // element in one of the winConditions array.
-        let playerOneIndices = getPlayerMarkerIndices(board, players[0].marker);
-        let playerTwoIndices = getPlayerMarkerIndices(board, players[1].marker);
-        // let indices = getPlayerMarkerIndices(board, playerMarker);
+        const currentPlayerIndices = getPlayerMarkerIndices(curentBoard, currentPlayer.marker);
 
         const isWinner = (nestedArray, indexArray) => {
             for (const winningCombo of nestedArray) {
@@ -129,11 +139,8 @@ const GameController = (
             return false;
         };
 
-        let result = "";
-        if (isWinner(winConditions, playerOneIndices)) result = players[0].name;
-        if (isWinner(winConditions, playerTwoIndices)) result = players[1].name;
+        return isWinner(winConditions, currentPlayerIndices);
 
-        return result;
     };
 
     const gameIsCats = (gameBoard) => {
@@ -156,13 +163,7 @@ const GameController = (
 
         if (!board.acceptPlayerMarker(square, getActivePlayer().marker)) return;
 
-        // check for winner
-        let winner = getWinner(board);
-        if (winner) {
-            // announce winner somehow
-            // board.resetBoard();
-            return;
-        }
+        if (didPlayerJustWin(board, getActivePlayer())) console.log('do something with winner');
 
         // check for cats
         if (gameIsCats(board)) {
