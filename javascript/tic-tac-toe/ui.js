@@ -147,6 +147,11 @@ const GameController = (
         return false;
     };
 
+    const getNewGame = () => {
+        board.resetBoard();
+        activePlayer = players[0];
+    };
+
     const playRound = (square) => {
 
         if (!board.acceptPlayerMarker(square, getActivePlayer().marker)) return;
@@ -169,7 +174,7 @@ const GameController = (
         switchActivePlayer();
     };
 
-    return { playRound, getActivePlayer, getBoard: board.getBoard, resetBoard: board.resetBoard };
+    return { playRound, getActivePlayer, getNewGame, getBoard: board.getBoard, };
 };
 
 /////////////////////////////////////////////
@@ -223,8 +228,8 @@ const UIController = () => {
         updateUI();
     };
 
-    let clickHandlerNewGame = (e) => {
-        game.resetBoard();
+    let clickHandlerNewGame = () => {
+        game.getNewGame();
         updateUI();
     };
 
