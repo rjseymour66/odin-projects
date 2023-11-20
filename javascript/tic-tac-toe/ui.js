@@ -78,13 +78,13 @@ const GameController = (
     // assign active player
     let activePlayer = players[0];
 
+    // func that returns active player
+    const getActivePlayer = () => activePlayer;
+
     // func that switches active player
     const switchActivePlayer = () => {
         activePlayer = activePlayer === players[0] ? players[1] : players[0];
     };
-
-    // func that returns active player
-    const getActivePlayer = () => activePlayer;
 
     // check for winner helper, returns empty string or winner name
     const getWinner = (gameBoard) => {
@@ -136,51 +136,6 @@ const GameController = (
         return result;
     };
 
-    // announce that player wins helper
-    const logPlayerWins = (name) => {
-        console.log(`${name} wins!`);
-        // alert(`${name} wins!`);
-    };
-
-    // const
-
-    const logGameIsCats = () => {
-        console.log("The game is CATS!");
-        // alert("The game is CATS!");
-    };
-
-    // start/log new round
-    const logBoard = () => {
-        board.printBoard();
-    };
-
-    const playRound = (square) => {
-        // console.log(`${getActivePlayer().name}'s turn.`);
-
-        if (!board.acceptPlayerMarker(square, getActivePlayer().marker)) return;
-
-        // console.log(
-        //   `Writing ${getActivePlayer().name}'s mark into square ${square}...`
-        // );
-
-        logBoard();
-
-        // check for cats
-        if (gameIsCats(board)) {
-            logGameIsCats();
-            return;
-        }
-
-        // check for winner
-        let winner = getWinner(board);
-        if (winner) {
-            logPlayerWins(winner);
-            return;
-        }
-
-        switchActivePlayer();
-    };
-
     const gameIsCats = (gameBoard) => {
         const emptySquares = gameBoard
             .getBoard()
@@ -192,7 +147,29 @@ const GameController = (
         return false;
     };
 
-    return { playRound, getActivePlayer, getBoard: board.getBoard };
+    const playRound = (square) => {
+
+        if (!board.acceptPlayerMarker(square, getActivePlayer().marker)) return;
+
+        // check for winner
+        let winner = getWinner(board);
+        if (winner) {
+            // announce winner somehow
+            // board.resetBoard();
+            return;
+        }
+
+        // check for cats
+        if (gameIsCats(board)) {
+            // announce game is cats somehow
+            // board.resetBoard();
+            return;
+        }
+
+        switchActivePlayer();
+    };
+
+    return { playRound, getActivePlayer, getBoard: board.getBoard, resetBoard: board.resetBoard };
 };
 
 /////////////////////////////////////////////
@@ -215,14 +192,14 @@ const UIController = () => {
     };
 
     // helper to reset UI
-    const resetUI = (rootEl) => {
-        while (rootEl.firstChild) {
-            rootEl.removeChild(rootEl.firstChild);
+    const clearUI = (board) => {
+        while (board.firstChild) {
+            board.removeChild(board.firstChild);
         }
     };
 
     const updateUI = () => {
-        boardDiv.textContent = "";
+        clearUI(boardDiv);
 
         const board = game.getBoard();
         const activePlayer = game.getActivePlayer();
@@ -247,8 +224,7 @@ const UIController = () => {
     };
 
     let clickHandlerNewGame = (e) => {
-        console.log(e.target);
-        resetUI(boardDiv);
+        game.resetBoard();
         updateUI();
     };
 
