@@ -11,48 +11,45 @@
 </head>
 
 <body>
-
-
-
     <header class="page-header">
         <h1 class="page-header__title">Tic Tac Toe</h1>
-
     </header>
 
     <main class="main-content">
         <div class="game-info">
             <button type="button" class="game-btn">New Game</button>
-            <!-- <div class="announcement">Player 1's turn!</div> -->
             <div class="announcement"></div>
         </div>
-        <!-- <div id="root"></div> -->
         <div class="game-container"></div>
     </main>
 
-
-
-    <!-- <main class="main-content">
-        <div class="game-info">
-            <button type="button" class="start-game">New Game</button>
-            <div class="announcement">Player 1's turn!</div>
+    <dialog class="modal game-over">
+        <h2 class="modal-header"></h2>
+        <button class="modal-close">Close</button>
+        <p class="modal-text">Rematch?</p>
+        <div class="rematch-buttons">
+            <button type="button" class="modal-button rematch">Yes</button>
+            <button type="button" class="modal-button exit">No</button>
         </div>
-        <div class="game-container">
-            <button class="grid-cell" data-square="1">1</button>
-            <button class="grid-cell" data-square="2">2</button>
-            <button class="grid-cell" data-square="3">3</button>
-            <button class="grid-cell" data-square="4">4</button>
-            <button class="grid-cell" data-square="5">5</button>
-            <button class="grid-cell" data-square="6">6</button>
-            <button class="grid-cell" data-square="7">7</button>
-            <button class="grid-cell" data-square="8">8</button>
-            <button class="grid-cell" data-square="9">9</button>
-        </div>
-    </main> -->
+    </dialog>
 
+    <dialog class="modal new-game">
+        <h2 class="modal-header">Start a new game</h2>
+        <button class="modal-close">Close</button>
+        <form action="post" class="modal-form">
+            <div class="form-group">
+                <label for="player-x-name">Player X</label>
+                <input type="text" name="name" id="player-x-name" placeholder="name">
+            </div>
+            <div class="form-group">
+                <label for="player-o-name">Player O</label>
+                <input type="text" name="name" id="player-o-name" placeholder="name">
+            </div>
 
+            <button type="button" class="modal-button start-game">Start game</button>
+        </form>
 
-
-
+    </dialog>
 </body>
 
 </html>

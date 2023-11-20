@@ -68,7 +68,6 @@ svg {
   }
 }
 
-button,
 input,
 select,
 textarea {
@@ -84,21 +83,27 @@ textarea {
   appearance: none;
 }
 
-/* My styles */
+/**********************************************
+* My styles
+***********************************************/
 
 :root {
   font-size: 1em;
   --ff-primary: "Roboto", sans-serif;
 
   --fs-header: 3rem;
+  --fs-modal-header: 2.5rem;
   --fs-marker: 7rem;
   --fs-game-info: 1.5rem;
+  --fs-button: 2rem;
+  --fs-form-label: 1.25rem;
 
   --fw-bold: 700;
 
   --grid-gap: 0.5rem;
 
   --clr-background: lightgray;
+  --clr-form-border: #b6b8ba;
 }
 
 body {
@@ -197,4 +202,130 @@ button {
 
 .grid-cell:hover {
   background-color: rgba(255, 255, 255, 0.75);
+}
+
+/**********************************
+* Modal
+***********************************/
+
+.modal {
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+
+  --max-width: 30rem;
+  --side-padding: 1rem;
+
+  height: 50%;
+  width: min(var(--max-width), 100% - var(--side-padding) * 2);
+  padding: 3rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal-close {
+  position: absolute;
+
+  top: 0.3rem;
+  right: 0.3rem;
+
+  padding: 1rem;
+  border: none;
+  height: 1rem;
+  width: 1rem;
+
+  text-indent: 10em;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.modal-close::after {
+  position: absolute;
+  line-height: 0.5;
+  top: 0.3rem;
+  right: 0.3rem;
+  text-indent: 0;
+  font-size: 2.5rem;
+  cursor: pointer;
+
+  content: "\00d7";
+}
+
+.modal-header {
+  font-size: var(--fs-modal-header);
+  text-align: center;
+}
+
+.modal-button {
+  font-size: var(--fs-button);
+  color: #fff;
+  background-color: #000;
+  padding: 0.5rem 2rem;
+  border-radius: 5px;
+}
+
+.modal-button:hover {
+  background-color: #fff;
+  color: #000;
+  border: none;
+
+  outline: 2px solid black;
+}
+
+/**********************************
+* Rematch modal
+***********************************/
+
+.modal-text {
+  margin-top: 3rem;
+  font-size: var(--fs-game-info);
+}
+
+.rematch-buttons {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 3rem;
+}
+
+/**********************************
+* New game modal
+***********************************/
+
+.modal-form {
+  vertical-align: center;
+}
+.modal-form > :not(:first-child) {
+  margin-top: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group > label {
+  display: block;
+  padding: 0.25rem 0;
+  font-size: var(--fs-form-label);
+}
+
+.form-group > input {
+  width: 100%;
+
+  border: 1px solid var(--clr-form-border);
+  border-radius: 5px;
+  padding: 0.5rem 0.5rem;
+}
+
+.form-group > input::placeholder {
+  color: var(--clr-form-border);
+}
+
+.modal-form > .start-game {
+  width: 100%;
 }

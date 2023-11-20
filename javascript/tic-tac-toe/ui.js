@@ -22,15 +22,20 @@ const Square = () => {
 /////////////////////////////////////////////
 
 const Player = (playerName, playerMarker) => {
-    const name = playerName;
+    let name = playerName;
     const marker = playerMarker;
-    let isWinner = false;
 
     const getName = () => name;
+    const setName = (newName) => {
+        name = newName;
+    };
     const getMarker = () => marker;
-    const setIsWinner = () => isWinner = true;
 
-    return { getName, getMarker, setIsWinner };
+    return {
+        getName,
+        setName,
+        getMarker,
+    };
 };
 
 /////////////////////////////////////////////
@@ -69,27 +74,29 @@ const Gameboard = () => {
 
     // reset game square values to ""
     const resetBoard = () => {
-        board.forEach(square => square.setValue(""));
+        board.forEach((square) => square.setValue(""));
     };
 
-    return { getBoard, acceptPlayerMarker, resetBoard };
+    return {
+        getBoard,
+        acceptPlayerMarker,
+        resetBoard,
+    };
 };
 
 /////////////////////////////////////////////
 // GameController
 /////////////////////////////////////////////
+
 const GameController = (
-    playerOneName = "Player 1",
-    playerTwoName = "Player 2"
+    playerOne = { name: "player1", marker: "X" },
+    playerTwo = { name: "player2", marker: "Y" }
 ) => {
     // create a new Gameboard
     const board = Gameboard();
 
     // create player objects with assigned markers
-    const players = [
-        { name: playerOneName, marker: "X" },
-        { name: playerTwoName, marker: "O" },
-    ];
+    const players = [playerOne, playerTwo];
 
     // assign active player
     let activePlayer = players[0];
@@ -102,9 +109,13 @@ const GameController = (
         activePlayer = activePlayer === players[0] ? players[1] : players[0];
     };
 
-    const didPlayerJustWin = (gameBoard, currentPlayer) => {
+    let winner = "";
+
+    const getWinner = () => winner;
+
+    const checkForWinner = (gameBoard) => {
         // get current board
-        const curentBoard = gameBoard.getBoard();
+        const currentBoard = gameBoard.getBoard();
 
         const winConditions = [
             [0, 1, 2],
@@ -128,7 +139,14 @@ const GameController = (
             return newArray;
         };
 
-        const currentPlayerIndices = getPlayerMarkerIndices(curentBoard, currentPlayer.marker);
+        let playerOneIndices = getPlayerMarkerIndices(
+            currentBoard,
+            players[0].getMarker()
+        );
+        let playerTwoIndices = getPlayerMarkerIndices(
+            currentBoard,
+            players[1].getMarker()
+        );
 
         const isWinner = (nestedArray, indexArray) => {
             for (const winningCombo of nestedArray) {
@@ -139,8 +157,16 @@ const GameController = (
             return false;
         };
 
-        return isWinner(winConditions, currentPlayerIndices);
+        if (isWinner(winConditions, playerOneIndices)) {
+            winner = players[0].getName();
+            return true;
+        }
+        if (isWinner(winConditions, playerTwoIndices)) {
+            winner = players[1].getName();
+            return true;
+        }
 
+        return false;
     };
 
     const gameIsCats = (gameBoard) => {
@@ -156,35 +182,25 @@ const GameController = (
 
     const getNewGame = () => {
         board.resetBoard();
+        winner = "";
         activePlayer = players[0];
     };
 
-    const declareWinner = () => {
-        getActivePlayer().setIsWinner(true);
-    };
-
     const playRound = (square) => {
-
-        if (!board.acceptPlayerMarker(square, getActivePlayer().marker)) return;
-
-        if (didPlayerJustWin(board, getActivePlayer())) {
-
-            console.log('do something with winner');
-            getNewGame();
+        if (!board.acceptPlayerMarker(square, getActivePlayer().getMarker()))
             return;
-        }
-
-        // check for cats
-        if (gameIsCats(board)) {
-            // announce game is cats somehow
-            // board.resetBoard();
-            return;
-        }
-
         switchActivePlayer();
     };
 
-    return { playRound, getActivePlayer, getNewGame, getBoard: board.getBoard, };
+    return {
+        playRound,
+        getActivePlayer,
+        getWinner,
+        gameIsCats,
+        getNewGame,
+        getBoard: board.getBoard,
+        checkForWinner,
+    };
 };
 
 /////////////////////////////////////////////
@@ -192,7 +208,41 @@ const GameController = (
 /////////////////////////////////////////////
 
 const UIController = () => {
-    const game = GameController();
+    let player1 = Player("player 1", "X");
+    let player2 = Player("player 2", "O");
+
+    const startGame = () => {
+        const newGameModal = document.querySelector(".new-game");
+        const playerXName = document.querySelector("#player-x-name");
+        const playerOName = document.querySelector("#player-o-name");
+        const newGameButton = document.querySelector(".game-btn");
+        const startGameButton = document.querySelector(".start-game");
+        const closeModal = document.querySelector(".new-game .modal-close");
+
+        newGameModal.showModal();
+
+        // when user clicks start game, start new game
+        newGameButton.addEventListener("click", () => {
+            newGameModal.showModal();
+            playerXName.value = "";
+            playerOName.value = "";
+        });
+
+        startGameButton.addEventListener("click", () => {
+            if (playerXName.value) player1.setName(playerXName.value);
+            if (playerOName.value) player2.setName(playerOName.value);
+            updateUI();
+            newGameModal.close();
+        });
+
+        closeModal.addEventListener("click", () => {
+            newGameModal.close();
+        });
+    };
+
+    startGame();
+
+    const game = GameController(player1, player2);
     const announcement = document.querySelector(".announcement");
     const boardDiv = document.querySelector(".game-container");
     const gameButton = document.querySelector(".game-btn");
@@ -220,7 +270,7 @@ const UIController = () => {
         const activePlayer = game.getActivePlayer();
 
         // populate banner
-        announcement.textContent = `${activePlayer.name}'s turn!`;
+        announcement.textContent = `${activePlayer.getName()}'s turn!`;
 
         board.forEach((square, index) => {
             const squareButton = createElement("button", "grid-cell");
@@ -236,9 +286,13 @@ const UIController = () => {
 
         game.playRound(selectedSquare);
         updateUI();
+
+        // check for winner or CATS
+        if (game.checkForWinner(game) || game.gameIsCats(game)) offerRematch();
     };
 
     let clickHandlerNewGame = () => {
+        const newGameModal = document.querySelector(".new-game");
         game.getNewGame();
         updateUI();
     };
@@ -248,11 +302,41 @@ const UIController = () => {
 
     updateUI();
 
-    // const appendMultipleChildren = (parentEl, ...children) => {
-    //   for (const child of children) {
-    //     parentEl.appendChild(child);
-    //   }
-    // };
+    const offerRematch = () => {
+        // get UI elements
+        const gameOverModal = document.querySelector(".game-over");
+        const modalHeader = document.querySelector(".modal-header");
+        const yesRematchButton = document.querySelector(".rematch");
+        const noRematchButton = document.querySelector(".exit");
+        const closeModal = document.querySelector(".modal-close");
+
+        // show the modal
+        gameOverModal.showModal();
+
+        // set the modal text. If there is no winner, then gameIsCats was called
+        game.getWinner() === ""
+            ? (modalHeader.textContent = "Game is CATS!")
+            : (modalHeader.textContent = `${game.getWinner()} wins!`);
+
+        // when user clicks yes, start new game
+        yesRematchButton.addEventListener("click", () => {
+            gameOverModal.close();
+            game.getNewGame();
+            updateUI();
+        });
+
+        noRematchButton.addEventListener("click", () => {
+            // update the announcement to explain the winner
+            gameOverModal.close();
+            announcement.textContent = gameResults.textContent;
+        });
+
+        closeModal.addEventListener("click", () => {
+            gameOverModal.close();
+        });
+    };
+
+    // offerRematch();
 };
 
 UIController();
