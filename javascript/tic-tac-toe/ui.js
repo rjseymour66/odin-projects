@@ -23,12 +23,12 @@ const Square = () => {
 
 const Player = (playerName, playerMarker) => {
     const name = playerName;
-    marker = playerMarker;
-    isWinner = false;
+    const marker = playerMarker;
+    let isWinner = false;
 
     const getName = () => name;
     const getMarker = () => marker;
-    const setIsWinner = () => isWinner ? true : false;
+    const setIsWinner = () => isWinner = true;
 
     return { getName, getMarker, setIsWinner };
 };
@@ -159,11 +159,20 @@ const GameController = (
         activePlayer = players[0];
     };
 
+    const declareWinner = () => {
+        getActivePlayer().setIsWinner(true);
+    };
+
     const playRound = (square) => {
 
         if (!board.acceptPlayerMarker(square, getActivePlayer().marker)) return;
 
-        if (didPlayerJustWin(board, getActivePlayer())) console.log('do something with winner');
+        if (didPlayerJustWin(board, getActivePlayer())) {
+
+            console.log('do something with winner');
+            getNewGame();
+            return;
+        }
 
         // check for cats
         if (gameIsCats(board)) {
