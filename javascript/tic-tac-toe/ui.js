@@ -7,14 +7,14 @@ const Square = () => {
     let value = "";
 
     // change the value of the Square to a players marker
-    const addPlayerMarker = (playerMarker) => {
-        value = playerMarker;
+    const setValue = (val) => {
+        value = val;
     };
 
     // get the value of the Square
     const getValue = () => value;
 
-    return { addPlayerMarker, getValue };
+    return { getValue, setValue };
 };
 
 /////////////////////////////////////////////
@@ -46,21 +46,17 @@ const Gameboard = () => {
         if (board[selectedSquare - 1].getValue()) return;
 
         // if the Square is empty, add the player's marker
-        board[selectedSquare - 1].addPlayerMarker(playerMarker);
+        board[selectedSquare - 1].setValue(playerMarker);
 
         return true;
     };
 
-    // log current board to console
-    const printBoard = () => {
-        // create new array with Square values
-        const boardWithSquareVals = board.map((square) => square.getValue());
-
-        // log board
-        console.log(boardWithSquareVals);
+    // reset game square values to ""
+    const resetBoard = () => {
+        board.forEach(square => square.setValue(""));
     };
 
-    return { getBoard, acceptPlayerMarker, printBoard };
+    return { getBoard, acceptPlayerMarker, resetBoard };
 };
 
 /////////////////////////////////////////////
