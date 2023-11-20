@@ -7,14 +7,30 @@ const Square = () => {
     let value = "";
 
     // change the value of the Square to a players marker
-    const addPlayerMarker = (playerMarker) => {
-        value = playerMarker;
+    const setValue = (val) => {
+        value = val;
     };
 
     // get the value of the Square
     const getValue = () => value;
 
-    return { addPlayerMarker, getValue };
+    return { getValue, setValue };
+};
+
+/////////////////////////////////////////////
+// Player
+/////////////////////////////////////////////
+
+const Player = (playerName, playerMarker) => {
+    const name = playerName;
+    const marker = playerMarker;
+    let isWinner = false;
+
+    const getName = () => name;
+    const getMarker = () => marker;
+    const setIsWinner = () => isWinner = true;
+
+    return { getName, getMarker, setIsWinner };
 };
 
 /////////////////////////////////////////////
@@ -46,21 +62,17 @@ const Gameboard = () => {
         if (board[selectedSquare - 1].getValue()) return;
 
         // if the Square is empty, add the player's marker
-        board[selectedSquare - 1].addPlayerMarker(playerMarker);
+        board[selectedSquare - 1].setValue(playerMarker);
 
         return true;
     };
 
-    // log current board to console
-    const printBoard = () => {
-        // create new array with Square values
-        const boardWithSquareVals = board.map((square) => square.getValue());
-
-        // log board
-        console.log(boardWithSquareVals);
+    // reset game square values to ""
+    const resetBoard = () => {
+        board.forEach(square => square.setValue(""));
     };
 
-    return { getBoard, acceptPlayerMarker, printBoard };
+    return { getBoard, acceptPlayerMarker, resetBoard };
 };
 
 /////////////////////////////////////////////
@@ -82,20 +94,18 @@ const GameController = (
     // assign active player
     let activePlayer = players[0];
 
+    // func that returns active player
+    const getActivePlayer = () => activePlayer;
+
     // func that switches active player
     const switchActivePlayer = () => {
         activePlayer = activePlayer === players[0] ? players[1] : players[0];
     };
 
-    // func that returns active player
-    const getActivePlayer = () => activePlayer;
+    const didPlayerJustWin = (gameBoard, currentPlayer) => {
+        // get current board
+        const curentBoard = gameBoard.getBoard();
 
-    // check for winner helper, returns empty string or winner name
-    const getWinner = (gameBoard) => {
-        // get the board
-        const board = gameBoard.getBoard();
-
-        // define winning square conditions
         const winConditions = [
             [0, 1, 2],
             [3, 4, 5],
@@ -118,11 +128,7 @@ const GameController = (
             return newArray;
         };
 
-        // check if getPlayerMarkerIndices() returns an array that contains every
-        // element in one of the winConditions array.
-        let playerOneIndices = getPlayerMarkerIndices(board, players[0].marker);
-        let playerTwoIndices = getPlayerMarkerIndices(board, players[1].marker);
-        // let indices = getPlayerMarkerIndices(board, playerMarker);
+        const currentPlayerIndices = getPlayerMarkerIndices(curentBoard, currentPlayer.marker);
 
         const isWinner = (nestedArray, indexArray) => {
             for (const winningCombo of nestedArray) {
@@ -133,56 +139,8 @@ const GameController = (
             return false;
         };
 
-        let result = "";
-        if (isWinner(winConditions, playerOneIndices)) result = players[0].name;
-        if (isWinner(winConditions, playerTwoIndices)) result = players[1].name;
+        return isWinner(winConditions, currentPlayerIndices);
 
-        return result;
-    };
-
-    // announce that player wins helper
-    const logPlayerWins = (name) => {
-        console.log(`${name} wins!`);
-        // alert(`${name} wins!`);
-    };
-
-    // const
-
-    const logGameIsCats = () => {
-        console.log("The game is CATS!");
-        // alert("The game is CATS!");
-    };
-
-    // start/log new round
-    const logBoard = () => {
-        board.printBoard();
-    };
-
-    const playRound = (square) => {
-        // console.log(`${getActivePlayer().name}'s turn.`);
-
-        if (!board.acceptPlayerMarker(square, getActivePlayer().marker)) return;
-
-        // console.log(
-        //   `Writing ${getActivePlayer().name}'s mark into square ${square}...`
-        // );
-
-        logBoard();
-
-        // check for cats
-        if (gameIsCats(board)) {
-            logGameIsCats();
-            return;
-        }
-
-        // check for winner
-        let winner = getWinner(board);
-        if (winner) {
-            logPlayerWins(winner);
-            return;
-        }
-
-        switchActivePlayer();
     };
 
     const gameIsCats = (gameBoard) => {
@@ -196,7 +154,37 @@ const GameController = (
         return false;
     };
 
-    return { playRound, getActivePlayer, getBoard: board.getBoard };
+    const getNewGame = () => {
+        board.resetBoard();
+        activePlayer = players[0];
+    };
+
+    const declareWinner = () => {
+        getActivePlayer().setIsWinner(true);
+    };
+
+    const playRound = (square) => {
+
+        if (!board.acceptPlayerMarker(square, getActivePlayer().marker)) return;
+
+        if (didPlayerJustWin(board, getActivePlayer())) {
+
+            console.log('do something with winner');
+            getNewGame();
+            return;
+        }
+
+        // check for cats
+        if (gameIsCats(board)) {
+            // announce game is cats somehow
+            // board.resetBoard();
+            return;
+        }
+
+        switchActivePlayer();
+    };
+
+    return { playRound, getActivePlayer, getNewGame, getBoard: board.getBoard, };
 };
 
 /////////////////////////////////////////////
@@ -219,14 +207,14 @@ const UIController = () => {
     };
 
     // helper to reset UI
-    const resetUI = (rootEl) => {
-        while (rootEl.firstChild) {
-            rootEl.removeChild(rootEl.firstChild);
+    const clearUI = (board) => {
+        while (board.firstChild) {
+            board.removeChild(board.firstChild);
         }
     };
 
     const updateUI = () => {
-        boardDiv.textContent = "";
+        clearUI(boardDiv);
 
         const board = game.getBoard();
         const activePlayer = game.getActivePlayer();
@@ -250,9 +238,8 @@ const UIController = () => {
         updateUI();
     };
 
-    let clickHandlerNewGame = (e) => {
-        console.log(e.target);
-        resetUI(boardDiv);
+    let clickHandlerNewGame = () => {
+        game.getNewGame();
         updateUI();
     };
 
