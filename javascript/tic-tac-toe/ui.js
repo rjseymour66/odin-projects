@@ -211,22 +211,17 @@ const UIController = () => {
     let player1 = Player("player 1", "X");
     let player2 = Player("player 2", "O");
 
+    // startGame
+    const newGameModal = document.querySelector(".new-game");
+    const playerXName = document.querySelector("#player-x-name");
+    const playerOName = document.querySelector("#player-o-name");
+    const newGameButton = document.querySelector(".game-btn");
+    const startGameButton = document.querySelector(".start-game");
+    const closeModal = document.querySelector(".new-game .modal-close");
+
     const startGame = () => {
-        const newGameModal = document.querySelector(".new-game");
-        const playerXName = document.querySelector("#player-x-name");
-        const playerOName = document.querySelector("#player-o-name");
-        const newGameButton = document.querySelector(".game-btn");
-        const startGameButton = document.querySelector(".start-game");
-        const closeModal = document.querySelector(".new-game .modal-close");
 
         newGameModal.showModal();
-
-        // when user clicks start game, start new game
-        newGameButton.addEventListener("click", () => {
-            newGameModal.showModal();
-            playerXName.value = "";
-            playerOName.value = "";
-        });
 
         startGameButton.addEventListener("click", () => {
             if (playerXName.value) player1.setName(playerXName.value);
@@ -239,6 +234,18 @@ const UIController = () => {
             newGameModal.close();
         });
     };
+
+    const clickHandlerNewGameInitModal = () => {
+        newGameModal.showModal();
+        playerXName.value = "";
+        playerOName.value = "";
+    };
+
+    const clickHandlerStartGame = () => {
+
+    };
+
+    newGameButton.addEventListener('click', clickHandlerNewGameInitModal);
 
     startGame();
 
@@ -328,7 +335,7 @@ const UIController = () => {
         noRematchButton.addEventListener("click", () => {
             // update the announcement to explain the winner
             gameOverModal.close();
-            announcement.textContent = gameResults.textContent;
+            announcement.textContent = modalHeader.textContent;
         });
 
         closeModal.addEventListener("click", () => {
