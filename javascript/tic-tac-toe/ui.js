@@ -245,8 +245,6 @@ const UIController = () => {
     startGameButton.addEventListener('click', clickHandlerStartGame);
     closeNewGameModal.addEventListener('click', clickHandlerCloseModal);
 
-    // startGame();
-
     const game = GameController(player1, player2);
     const announcement = document.querySelector(".announcement");
     const boardDiv = document.querySelector(".game-container");
@@ -305,8 +303,6 @@ const UIController = () => {
     boardDiv.addEventListener("click", clickHandlerBoard);
     gameButton.addEventListener("click", clickHandlerNewGame);
 
-    updateUI();
-
     // rematch handles
     const gameOverModal = document.querySelector(".game-over");
     const modalHeader = document.querySelector(".modal-header");
@@ -340,6 +336,8 @@ const UIController = () => {
     yesRematchButton.addEventListener('click', clickHandlerRematch);
     noRematchButton.addEventListener('click', clickHandlerNoRematch);
     closeRematchModal.addEventListener('click', clickHandlerCloseModal);
+
+    startGame();
 };
 
 UIController();
