@@ -211,36 +211,41 @@ const UIController = () => {
     let player1 = Player("player 1", "X");
     let player2 = Player("player 2", "O");
 
+    // startGame
+    const newGameModal = document.querySelector(".new-game");
+    const playerXName = document.querySelector("#player-x-name");
+    const playerOName = document.querySelector("#player-o-name");
+    const newGameButton = document.querySelector(".game-btn");
+    const startGameButton = document.querySelector(".start-game");
+    const closeNewGameModal = document.querySelector(".new-game .modal-close");
+
     const startGame = () => {
-        const newGameModal = document.querySelector(".new-game");
-        const playerXName = document.querySelector("#player-x-name");
-        const playerOName = document.querySelector("#player-o-name");
-        const newGameButton = document.querySelector(".game-btn");
-        const startGameButton = document.querySelector(".start-game");
-        const closeModal = document.querySelector(".new-game .modal-close");
-
         newGameModal.showModal();
-
-        // when user clicks start game, start new game
-        newGameButton.addEventListener("click", () => {
-            newGameModal.showModal();
-            playerXName.value = "";
-            playerOName.value = "";
-        });
-
-        startGameButton.addEventListener("click", () => {
-            if (playerXName.value) player1.setName(playerXName.value);
-            if (playerOName.value) player2.setName(playerOName.value);
-            updateUI();
-            newGameModal.close();
-        });
-
-        closeModal.addEventListener("click", () => {
-            newGameModal.close();
-        });
     };
 
-    startGame();
+    const clickHandlerNewGameInitModal = () => {
+        newGameModal.showModal();
+        playerXName.value = "";
+        playerOName.value = "";
+    };
+
+    const clickHandlerStartGame = () => {
+        if (playerXName.value) player1.setName(playerXName.value);
+        if (playerOName.value) player2.setName(playerOName.value);
+        updateUI();
+        newGameModal.close();
+    };
+
+    const clickHandlerCloseModal = (e) => {
+        e.target.parentElement.close();
+        // newGameModal.close();
+    };
+
+    newGameButton.addEventListener('click', clickHandlerNewGameInitModal);
+    startGameButton.addEventListener('click', clickHandlerStartGame);
+    closeNewGameModal.addEventListener('click', clickHandlerCloseModal);
+
+    // startGame();
 
     const game = GameController(player1, player2);
     const announcement = document.querySelector(".announcement");
@@ -302,14 +307,16 @@ const UIController = () => {
 
     updateUI();
 
-    const offerRematch = () => {
-        // get UI elements
-        const gameOverModal = document.querySelector(".game-over");
-        const modalHeader = document.querySelector(".modal-header");
-        const yesRematchButton = document.querySelector(".rematch");
-        const noRematchButton = document.querySelector(".exit");
-        const closeModal = document.querySelector(".modal-close");
+    // rematch handles
+    const gameOverModal = document.querySelector(".game-over");
+    const modalHeader = document.querySelector(".modal-header");
+    const yesRematchButton = document.querySelector(".rematch");
+    const noRematchButton = document.querySelector(".exit");
+    const closeRematchModal = document.querySelector(".modal-close");
 
+
+    // Rematch func and event listeners
+    const offerRematch = () => {
         // show the modal
         gameOverModal.showModal();
 
@@ -317,26 +324,22 @@ const UIController = () => {
         game.getWinner() === ""
             ? (modalHeader.textContent = "Game is CATS!")
             : (modalHeader.textContent = `${game.getWinner()} wins!`);
-
-        // when user clicks yes, start new game
-        yesRematchButton.addEventListener("click", () => {
-            gameOverModal.close();
-            game.getNewGame();
-            updateUI();
-        });
-
-        noRematchButton.addEventListener("click", () => {
-            // update the announcement to explain the winner
-            gameOverModal.close();
-            announcement.textContent = gameResults.textContent;
-        });
-
-        closeModal.addEventListener("click", () => {
-            gameOverModal.close();
-        });
     };
 
-    // offerRematch();
+    const clickHandlerRematch = () => {
+        gameOverModal.close();
+        game.getNewGame();
+        updateUI();
+    };
+
+    const clickHandlerNoRematch = () => {
+        gameOverModal.close();
+        announcement.textContent = modalHeader.textContent;
+    };
+
+    yesRematchButton.addEventListener('click', clickHandlerRematch);
+    noRematchButton.addEventListener('click', clickHandlerNoRematch);
+    closeRematchModal.addEventListener('click', clickHandlerCloseModal);
 };
 
 UIController();
