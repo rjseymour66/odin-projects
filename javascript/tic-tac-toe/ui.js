@@ -221,6 +221,8 @@ const UIController = () => {
 
     const startGame = () => {
         newGameModal.showModal();
+        playerXName.value = "";
+        playerOName.value = "";
     };
 
     const clickHandlerNewGameInitModal = () => {
@@ -230,15 +232,14 @@ const UIController = () => {
     };
 
     const clickHandlerStartGame = () => {
-        if (playerXName.value) player1.setName(playerXName.value);
-        if (playerOName.value) player2.setName(playerOName.value);
+        playerXName.value ? player1.setName(playerXName.value) : player1.setName("player 1");
+        playerOName.value ? player2.setName(playerOName.value) : player2.setName("player 2");
         updateUI();
         newGameModal.close();
     };
 
     const clickHandlerCloseModal = (e) => {
         e.target.parentElement.close();
-        // newGameModal.close();
     };
 
     newGameButton.addEventListener('click', clickHandlerNewGameInitModal);
