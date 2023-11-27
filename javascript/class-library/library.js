@@ -27,7 +27,7 @@ class Book {
         return this.read;
     }
 
-    // switch 
+    // switch
     toggleRead() {
         this.read === true ? false : true;
     }
@@ -71,7 +71,7 @@ class Library {
 class UIController {
     constructor() {
         // get root
-        this.root = this.getElement('#root');
+        this.root = this.getElement("#root");
 
         // get tBody
         this.table = this.getTable();
@@ -79,8 +79,8 @@ class UIController {
         this.tableBody = this.getElement(`tbody`);
 
         // modal
-        this.modal = this.getElement('.modal');
-        this.closeModal = this.getElement('.modal-close');
+        this.modal = this.getElement(".modal");
+        this.closeModal = this.getElement(".modal-close");
         this.submitModal = this.getElement(".submit-modal-form");
 
         // book
@@ -114,23 +114,23 @@ class UIController {
     // create table helper
     getTable() {
         // create table element
-        const table = this.createElement('table');
+        const table = this.createElement("table");
         // create thead
-        const thead = this.createElement('thead');
+        const thead = this.createElement("thead");
         // create tr
-        const tr = this.createElement('tr');
+        const tr = this.createElement("tr");
         // th for title
-        const titleHeader = this.createElement('th');
-        titleHeader.textContent = 'Title';
+        const titleHeader = this.createElement("th");
+        titleHeader.textContent = "Title";
         // th for author
-        const authorHeader = this.createElement('th');
-        authorHeader.textContent = 'Author';
+        const authorHeader = this.createElement("th");
+        authorHeader.textContent = "Author";
         // th for pages centered
-        const pagesHeader = this.createElement('th', 'centered');
-        pagesHeader.textContent = 'Pages';
+        const pagesHeader = this.createElement("th", "centered");
+        pagesHeader.textContent = "Pages";
         // th for read cent
-        const readHeader = this.createElement('th', 'centered');
-        readHeader.textContent = 'Read?';
+        const readHeader = this.createElement("th", "centered");
+        readHeader.textContent = "Read?";
 
         // append headers to tr
         const headers = [titleHeader, authorHeader, pagesHeader, readHeader];
@@ -143,7 +143,7 @@ class UIController {
         table.appendChild(thead);
 
         // create tbody
-        const tbody = this.createElement('tbody');
+        const tbody = this.createElement("tbody");
         table.appendChild(tbody);
 
         return table;
@@ -154,29 +154,28 @@ class UIController {
         this._resetUI();
 
         library.forEach((book, index) => {
-
             // create a table row
-            const tr = this.createElement('tr');
+            const tr = document.createElement("tr");
 
             for (const value of Object.values(book)) {
                 // create a td for each prop in the book
-                const td = this.createElement('td');
+                const td = document.createElement("td");
 
                 let readButton = this._createReadButton();
 
                 if (value === true) {
-                    readButton.textContent = 'Read';
+                    readButton.textContent = "Read";
                     readButton.style.backgroundColor = this.colorPrimary;
                     td.appendChild(readButton);
-                    td.classList.add('centered');
+                    td.classList.add("centered");
                 } else if (value === false) {
-                    readButton.textContent = 'Unread';
-                    readButton.style.backgroundColor = 'red';
+                    readButton.textContent = "Unread";
+                    readButton.style.backgroundColor = "red";
                     td.appendChild(readButton);
-                    td.classList.add('centered');
-                } else if (typeof value === 'number') {
+                    td.classList.add("centered");
+                } else if (typeof value === "number") {
                     td.textContent = `${value}`;
-                    td.classList.add('centered');
+                    td.classList.add("centered");
                 } else {
                     td.textContent = `${value}`;
                 }
@@ -184,12 +183,12 @@ class UIController {
             }
 
             // create delete icon
-            let deleteIcon = this.createElement('img');
-            deleteIcon.src = '/assets/delete.svg';
-            let deleteCell = this.createElement('td');
-            deleteCell.classList.add('read-cell', 'centered');
-            deleteCell.setAttribute('data-row', index);
-            deleteCell.addEventListener('click', (e) => {
+            let deleteIcon = document.createElement("img");
+            deleteIcon.src = "/assets/delete.svg";
+            let deleteCell = document.createElement("td");
+            deleteCell.classList.add("read-cell", "centered");
+            deleteCell.setAttribute("data-row", index);
+            deleteCell.addEventListener("click", (e) => {
                 const tableCell = e.target.parentNode;
                 const tableRow = tableCell.parentNode;
 
@@ -211,7 +210,8 @@ class UIController {
 
     // createReadButton
     _createReadButton() {
-        let readButton = this.getElement("button", "read-btn");
+        let readButton = document.createElement("button");
+        readButton.classList.add("read-btn");
         // readButton.classList.add("read-btn");
         readButton.setAttribute("type", "button");
         readButton.setAttribute("id", "read-btn");
@@ -225,7 +225,7 @@ class UIController {
             }
         });
         return readButton;
-    };
+    }
 
     // resetModalInputs
     resetModalInputs() {
@@ -235,11 +235,40 @@ class UIController {
         this.checkbox.checked = false;
     }
 
+    // open modal with add book button
+    addBookModalOpen() {
+        this.modal.showModal();
+        this.resetModalInputs();
+    }
+
+    xClickCloseModal() {
+        this.modal.close();
+    }
+
+    submitBookModal(library) {
+        let title = this.newTitle.value;
+        let author = this.newAuthor.value;
+        let pagesStr = this.newPages.value;
+        let pages = parseInt(pagesStr);
+
+        let read;
+        this.checkbox.checked ? (read = true) : (read = false);
+
+        if (title === "" || author === "" || isNaN(pages)) {
+            return;
+        }
+
+        let book = new Book(title, author, pages, read);
+        library.addBook(book);
+        this.renderBooks(library.books);
+
+        this.modal.close();
+    }
+
     // addBook EventListener
     bindAddBook(handler) {
-        this.addBook.addEventListener('click', function (e) {
+        this.addBook.addEventListener("click", function (e) {
             e.preventDefault();
-            // e.stopPropagation();
 
             handler();
         });
@@ -247,20 +276,17 @@ class UIController {
 
     // submitModal EventListener
     bindSubmitModal(handler) {
-        this.submitModal.addEventListener('click', function (e) {
+        this.submitModal.addEventListener("click", function (e) {
             e.preventDefault();
-            // e.stopPropagation();
 
-            handler(this.library);
+            handler();
         });
-
     }
 
     // closeModal EventListener
     bindCloseModal(handler) {
-        this.closeModal.addEventListener('click', function (e) {
+        this.closeModal.addEventListener("click", function (e) {
             e.preventDefault();
-            // e.stopPropagation();
             handler();
         });
     }
@@ -278,35 +304,17 @@ class LibraryController {
 
     // addBook EventListener
     handleAddBook = () => {
-        this.uiController.modal.showModal();
-        this.uiController.resetModalInputs();
+        this.uiController.addBookModalOpen();
     };
 
     // submitModal EventListener
     handleSubmitModal = () => {
-        let title = this.uiController.newTitle.value;
-        let author = this.uiController.newAuthor.value;
-        let pagesStr = this.uiController.newPages.value;
-        let pages = parseInt(pagesStr);
-
-        let read;
-        this.uiController.checkbox.checked ? (read = true) : (read = false);
-
-        if (title === "" || author === "" || isNaN(pages)) {
-            return;
-        }
-
-        let book = new Book(title, author, pages, read);
-        this.library.addBook(book);
-        this.uiController.renderBooks(this.library.books);
-
-        // this.logLibrary();
-        this.uiController.modal.close();
+        this.uiController.submitBookModal(this.library);
     };
 
     // closeModal EventListener
     handleCloseModal = () => {
-        this.uiController.modal.close();
+        this.uiController.xClickCloseModal();
     };
 
     logLibrary() {
