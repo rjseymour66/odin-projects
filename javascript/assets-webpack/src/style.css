@@ -1,4 +1,13 @@
+@font-face {
+  font-family: MyFont;
+  src: local("VinaSans-Regular.tff");
+  font-weight: 400;
+  font-style: normal;
+}
+
 .hello {
   color: red;
+  font-family: MyFont;
   background: url("./icon.svg");
+  font-size: 15rem;
 }
