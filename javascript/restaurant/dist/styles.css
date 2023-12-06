@@ -36,7 +36,7 @@ body {
 /* Set core body defaults */
 body {
   text-rendering: optimizeSpeed;
-  line-height: 1.5;
+  line-height: 1.2;
 }
 
 /* A elements that don't have a class get default styles */
@@ -95,10 +95,15 @@ textarea {
 
   --fs-header: 7rem;
   --fs-header-secondary: 2rem;
+  --fs-header-section: 1.75rem;
+  --fs-menu-item-name: 1.25rem;
+  --fs-menu-desc: 1rem;
+  --fs-menu-price: 1.25rem;
 
   --clr-primary: #fffee0;
 
   --gap-size: 4rem;
+  --gap-section: 3rem;
 }
 
 /*****************************
@@ -106,9 +111,9 @@ textarea {
 ******************************/
 
 body {
-  background: url(../src/assets/background-image.jpg);
+  /* background: url(../src/assets/home-bg.jpg); */
+  background: url(../src/assets/menu-bg.jpg);
   background-size: cover;
-
   font-family: var(--ff-primary);
 }
 
@@ -185,7 +190,53 @@ body {
   gap: var(--gap-size);
   justify-content: center;
 
-  margin: 0 0 0.5rem;
+  margin: 5rem 0 0.5rem;
 
   color: var(--clr-primary);
+}
+
+/*****************************
+* Menu
+******************************/
+
+.menu {
+  display: grid;
+  grid-template-rows: auto;
+  gap: var(--gap-section);
+
+  margin: 2rem 0;
+}
+
+.menu-section {
+  --max-width: 1000px;
+  --side-padding: 1rem;
+
+  width: min(var(--max-width), 100% - var(--side-padding) * 2);
+  margin: auto;
+}
+
+.section-title {
+  font-size: var(--fs-header-section);
+  color: var(--clr-primary);
+  text-transform: uppercase;
+}
+
+.menu-list {
+  list-style-type: none;
+  color: var(--clr-primary);
+}
+
+.list-item {
+  margin: 1rem 0;
+}
+
+.item-name {
+  display: block;
+  font-size: var(--fs-menu-item-name);
+  font-weight: bold;
+}
+
+.item-price {
+  font-size: var(--fs-menu-price);
+  margin-left: 1rem;
 }

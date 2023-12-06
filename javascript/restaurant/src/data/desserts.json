@@ -1,0 +1,12 @@
+[
+    {
+        "name":"Olive oil chocolate mousse",
+        "description":"Dark Italian cocoa, whipped cream, blueberries, cocao nibs",
+        "price": "$10"
+    },
+    {
+        "name":"Torta gialla",
+        "description":"Yellow cake, chocolate fudge buttercream",
+        "price": "$10"
+    }
+]

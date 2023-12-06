@@ -1,0 +1,22 @@
+[
+    {
+        "name":"Bruschetta alla Trapanese",
+        "description": "Tomato-almond pesto, ricotta",
+        "price": "$12"
+    },
+    {
+        "name":"Meatballs",
+        "description": "Roasted tomato ragu, pecorino, parsley",
+        "price": "$12"
+    },
+    {
+        "name":"Mussels & Clams",
+        "description": "Herb gremolata, white beans, prosecco, salsa bomba, focaccia",
+        "price": "$21"
+    },
+    {
+        "name":"Caesar salad",
+        "description": "Kale & herb dressing, baby lettuces, pecorino, breadcrumbs",
+        "price": "$18"
+    }
+]

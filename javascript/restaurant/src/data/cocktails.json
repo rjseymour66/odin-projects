@@ -1,0 +1,27 @@
+[
+    {
+        "name": "House Martini",
+        "description": "Olive oil infused Hendrick's gin, vermouth, olives",
+        "price": "$20"
+    },
+    {
+        "name": "Manhattan",
+        "description": "Bourbon, barolo chinato, cacao bitters",
+        "price": "$16"
+    },
+    {
+        "name": "Classic Negroni",
+        "description": "Dry gin, sweet vermouth, campari",
+        "price": "$14"
+    },
+    {
+        "name": "Aperol Spritz",
+        "description": "Aperol, prosecco, soda",
+        "price": "$14"
+    },
+    {
+        "name": "Espresso Martini",
+        "description": "Vodka, coffee liquer, espresso, bitters, amaro",
+        "price": "$16"
+    }
+]

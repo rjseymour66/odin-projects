@@ -1,0 +1,32 @@
+[
+    {
+        "name":"Chicken picatta",
+        "description": "Lemon caper butter sauce, penne",
+        "price": "$26"
+    },
+    {
+        "name":"Chicken or veal chop milanese",
+        "description": "Confit tomato, pickled peppers, ricotta, kale",
+        "price": "$26/$42"
+    },
+    {
+        "name":"Ribeye",
+        "description": "Brandt beef, boneless 16 oz.",
+        "price": "$65"
+    },
+    {
+        "name":"Filet mignon",
+        "description": "Brandt beef, 12 oz.",
+        "price": "$55"
+    },
+    {
+        "name":"Veal prime rib",
+        "description": "Mushroom, au jus, horseradish and goat cheese crema",
+        "price": "$45"
+    },
+    {
+        "name":"Dry-aged florentine porterhouse",
+        "description": "Autumn caponata, concord grape jus, chili-garlic salsa verde",
+        "price": "$150"
+    }
+]
