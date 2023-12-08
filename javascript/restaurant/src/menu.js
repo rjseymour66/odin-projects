@@ -1,3 +1,5 @@
+import './styles.css';
+
 import cocktailsJSON from './data/cocktails.json';
 import startersJSON from './data/starters.json';
 import mainJSON from './data/main.json';

@@ -1,3 +1,5 @@
+import './styles.css';
+
 const createSiteNav = () => {
     let nav = document.createElement('nav');
     nav.classList.add('main-header__nav');

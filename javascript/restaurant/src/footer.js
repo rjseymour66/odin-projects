@@ -1,3 +1,5 @@
+import './styles.css';
+
 let createFooter = () => {
     let footer = document.createElement('footer');
     footer.classList.add('footer');

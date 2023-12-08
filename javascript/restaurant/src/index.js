@@ -1,3 +1,5 @@
+import './styles.css';
+
 import { createHeader } from './header';
 import { createFooter } from './footer';
 import { createHomeMain } from './home';
@@ -17,9 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const content = document.querySelector('#content');
 
     // add the header that displays home by default
-    content.appendChild(header);
-    content.appendChild(homeMain);
-    content.appendChild(footer);
+    renderPage(homeMain);
 
     // set up event listeners on buttons
     const navButtons = document.querySelectorAll('button');

@@ -1,3 +1,5 @@
+import './styles.css';
+
 let createHomeMain = () => {
     let main = document.createElement('main');
     main.classList.add('section-content');
