@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const json5 = require('json5');
 
 module.exports = {
@@ -24,5 +25,14 @@ module.exports = {
                 },
             },
         ]
-    }
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './src/index.html',
+            title: 'Restaurant | Odin',
+            filename: 'index.html',
+            // inject: 'body',
+            inject: 'head',
+        })
+    ]
 };
