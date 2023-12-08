@@ -1,9 +1,9 @@
-import cocktails from './data/cocktails.json';
-import starters from './data/starters.json';
-import main from './data/main.json';
-import desserts from './data/desserts.json';
+import cocktailsJSON from './data/cocktails.json';
+import startersJSON from './data/starters.json';
+import mainJSON from './data/main.json';
+import dessertsJSON from './data/desserts.json';
 
-let createMenuSectionList = (menuList) => {
+let createMenuList = (menuList) => {
     // create the ul
     let ul = document.createElement('ul');
     ul.classList.add('cocktail-list');
@@ -46,94 +46,21 @@ let createMenuSectionList = (menuList) => {
         // append li to ul
         ul.appendChild(li);
     }
-
     return ul;
-
 };
 
-let createCocktailSection = () => {
-
+const createMenuSection = (sectionTitle, JSONdata) => {
     // create section
     let section = document.createElement('section');
     section.classList.add('menu-section');
-    section.classList.add('cocktails');
 
     // create h2
     let h2 = document.createElement('h2');
     h2.classList.add('section-title');
-    h2.textContent = 'cocktails';
+    h2.textContent = sectionTitle;
 
     // create cocktail list
-    let ul = createMenuSectionList(cocktails);
-
-    // append h2 to section
-    section.appendChild(h2);
-    // append ul to section
-    section.appendChild(ul);
-
-    return section;
-};
-
-let createStarterSection = () => {
-
-    // create section
-    let section = document.createElement('section');
-    section.classList.add('menu-section');
-    section.classList.add('cocktails');
-
-    // create h2
-    let h2 = document.createElement('h2');
-    h2.classList.add('section-title');
-    h2.textContent = 'cocktails';
-
-    // create cocktail list
-    let ul = createMenuSectionList(starters);
-
-    // append h2 to section
-    section.appendChild(h2);
-    // append ul to section
-    section.appendChild(ul);
-
-    return section;
-};
-
-let createMainSection = () => {
-
-    // create section
-    let section = document.createElement('section');
-    section.classList.add('menu-section');
-    section.classList.add('cocktails');
-
-    // create h2
-    let h2 = document.createElement('h2');
-    h2.classList.add('section-title');
-    h2.textContent = 'cocktails';
-
-    // create cocktail list
-    let ul = createMenuSectionList(main);
-
-    // append h2 to section
-    section.appendChild(h2);
-    // append ul to section
-    section.appendChild(ul);
-
-    return section;
-};
-
-let createDessertSection = () => {
-
-    // create section
-    let section = document.createElement('section');
-    section.classList.add('menu-section');
-    section.classList.add('cocktails');
-
-    // create h2
-    let h2 = document.createElement('h2');
-    h2.classList.add('section-title');
-    h2.textContent = 'cocktails';
-
-    // create cocktail list
-    let ul = createMenuSectionList(desserts);
+    let ul = createMenuList(JSONdata);
 
     // append h2 to section
     section.appendChild(h2);
@@ -144,13 +71,13 @@ let createDessertSection = () => {
 };
 
 let createMenuMain = () => {
-    let main = document.createElement('menu');
+    const main = document.createElement('menu');
     main.classList.add('menu');
 
-    let cocktailSection = createCocktailSection();
-    let starterSection = createStarterSection();
-    let mainSection = createMainSection();
-    let dessertSection = createDessertSection();
+    const cocktailSection = createMenuSection('cocktails', cocktailsJSON);
+    const starterSection = createMenuSection('starters', startersJSON);
+    const mainSection = createMenuSection('main', mainJSON);
+    const dessertSection = createMenuSection('dessert', dessertsJSON);
 
     main.appendChild(cocktailSection);
     main.appendChild(starterSection);
