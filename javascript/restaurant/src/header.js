@@ -5,16 +5,16 @@ const createSiteNav = () => {
     let ul = document.createElement('ul');
     ul.classList.add('site-nav');
     // create a tags
-    let homeLink = document.createElement('a');
+    let homeLink = document.createElement('button');
     homeLink.href = '#';
     homeLink.textContent = 'Home';
-    homeLink.classList.add('selected');
+    homeLink.classList.add('active');
 
-    let menuLink = document.createElement('a');
+    let menuLink = document.createElement('button');
     menuLink.href = '#';
     menuLink.textContent = 'Menu';
 
-    let aboutLink = document.createElement('a');
+    let aboutLink = document.createElement('button');
     aboutLink.href = '#';
     aboutLink.textContent = 'About';
 
@@ -35,6 +35,7 @@ const createSiteNav = () => {
 
     return nav;
 };
+
 
 const createHeader = () => {
     let nav = createSiteNav();
