@@ -1,0 +1,263 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+  /* inherit font so you can define styles 
+  for h1, h* elements instead of rely on user 
+  agent defaults */
+  font: inherit;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* Set core body defaults */
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.2;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+button,
+input,
+select,
+textarea {
+  /* width: 150px; */
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  font-family: inherit;
+  font-size: 100%;
+
+  /* removes system-level styling */
+  appearance: none;
+}
+
+/*****************************
+* My styles
+******************************/
+
+:root {
+  font-size: 1em;
+
+  --ff-primary: "Roboto", sans-serif;
+
+  --fs-header: 7rem;
+  --fs-header-secondary: 2rem;
+  --fs-header-section: 1.75rem;
+  --fs-menu-item-name: 1.25rem;
+  --fs-menu-desc: 1rem;
+  --fs-menu-price: 1.25rem;
+  --fs-about-para: 1.25rem;
+
+  --clr-primary: #fffee0;
+
+  --gap-size: 4rem;
+  --gap-section: 3rem;
+
+  --max-width: 1000px;
+  --side-padding: 1rem;
+
+  --main-margin-top: 2rem;
+}
+
+/*****************************
+* Styles start
+******************************/
+
+body {
+  /* background: url(../src/assets/home-bg.jpg); */
+  /* background: url(../src/assets/menu-bg.jpg); */
+  /* background-size: cover; */
+  font-family: var(--ff-primary);
+}
+
+/*****************************
+* grid setup
+******************************/
+
+#content {
+  background: url(../src/assets/home-bg.jpg);
+  /* background: url(../src/assets/menu-bg.jpg); */
+  background-size: cover;
+
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+/*****************************
+* Header
+******************************/
+
+.main-header__heading {
+  font-size: var(--fs-header);
+  color: var(--clr-primary);
+
+  text-align: center;
+}
+
+.site-nav {
+  display: flex;
+  gap: var(--gap-size);
+  list-style-type: none;
+
+  justify-content: center;
+}
+
+.site-nav > li > button {
+  padding: 0.5rem 1rem;
+  color: var(--clr-primary);
+  background-color: transparent;
+  border: none;
+
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.site-nav .active {
+  outline: 2px solid var(--clr-primary);
+  border-radius: 3px;
+}
+
+/*****************************
+* Main home section
+******************************/
+
+.section-content {
+  flex: 1 0 auto;
+}
+
+.section-content .home-text {
+  color: var(--clr-primary);
+
+  font-size: 2rem;
+
+  padding: 5rem 15%;
+  margin: 0 auto;
+}
+
+/*****************************
+* Footer
+******************************/
+
+.footer {
+  display: flex;
+  gap: var(--gap-size);
+  justify-content: center;
+
+  margin: 5rem 0 0.5rem;
+
+  color: var(--clr-primary);
+}
+
+/*****************************
+* Menu
+******************************/
+
+.menu {
+  display: grid;
+  grid-template-rows: auto;
+  gap: var(--gap-section);
+
+  margin: var(--main-margin-top) 0;
+}
+
+.menu-section {
+  width: min(var(--max-width), 100% - var(--side-padding) * 2);
+  margin: auto;
+}
+
+.section-title {
+  font-size: var(--fs-header-section);
+  color: var(--clr-primary);
+  text-transform: uppercase;
+}
+
+.menu-list {
+  list-style-type: none;
+  color: var(--clr-primary);
+}
+
+.list-item {
+  margin: 1rem 0;
+}
+
+.item-name {
+  display: block;
+  font-size: var(--fs-menu-item-name);
+  font-weight: bold;
+}
+
+.item-price {
+  font-size: var(--fs-menu-price);
+  margin-left: 1rem;
+}
+
+/*****************************
+* About
+******************************/
+
+.about-main {
+  width: min(900px, 100% - var(--side-padding) * 2);
+  margin: var(--main-margin-top) auto;
+
+  color: var(--clr-primary);
+  font-size: var(--fs-about-para);
+  line-height: 1.5;
+}
+
+.about-para:not(:first-of-type) {
+  margin: var(--main-margin-top) 0;
+}
