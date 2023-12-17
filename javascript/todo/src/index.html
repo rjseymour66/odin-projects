@@ -6,12 +6,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+    <title>Todos | Odin</title>
 </head>
 
 <body>
-    <div id="content"></div>
-    <h1>Hello</h1>
+    <div id="content">
+        <!-- header -->
+        <header class="page-header">
+            <h1 class="header-heading">Todos</h1>
+        </header>
+
+        <!-- todo content -->
+
+        <div class="todo-content">
+            <form class="input form-row">
+                <input type="text" name="input-todo" id="input-todo">
+                <button type="submit" class="submit-todo">Add todo</button>
+            </form>
+            <ul class="todo-list">
+                <li class="list-item" data-row="1">
+                    <input type="checkbox" name="status" id="status" checked>
+                    <span class="todo-id">1</span>
+                    <p class="todo-text">Walk the dog</p>
+                </li>
+                <li class="list-item" data-row="2">
+                    <input type="checkbox" name="status" id="status" checked>
+                    <span class="todo-id">2</span>
+                    <p class="todo-text">Do laundry</p>
+                </li>
+                <li class="list-item" data-row="3">
+                    <input type="checkbox" name="status" id="status" checked>
+                    <span class="todo-id">3</span>
+                    <p class="todo-text">Grocery shop</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
 </body>
 
 </html>

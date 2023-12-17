@@ -6,6 +6,9 @@ module.exports = {
     mode: 'development',
     devtool: 'inline-source-map',
     entry: './src/index.js',
+    devServer: {
+        static: './src'
+    },
     output: {
         filename: 'main.js',
         path: path.resolve(__dirname, 'dist'),
@@ -29,7 +32,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html',
-            title: 'Restaurant | Odin',
+            title: 'Todos | Odin',
             filename: 'index.html',
             // inject: 'body',
             inject: 'head',
