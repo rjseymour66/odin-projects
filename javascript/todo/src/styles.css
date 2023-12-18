@@ -81,12 +81,12 @@ textarea {
   font-size: 100%;
 
   /* removes system-level styling */
-  appearance: none;
+  /* appearance: none; */
 }
 
-/******************************
+/******************************************************
 * Start styles
-*******************************/
+*******************************************************/
 
 :root {
   font-size: 1em;
@@ -95,6 +95,10 @@ textarea {
 
   --fs-header: 5rem;
   --fs-todo: 1.5rem;
+  --fs-label: 1.25rem;
+  --fs-button: 1rem;
+
+  --fw-bold: 700;
 
   --clr-50: #faf5ff;
   --clr-100: #f3e8ff;
@@ -108,13 +112,18 @@ textarea {
   --clr-900: #581c87;
   --clr-950: #3b0764;
 
+  --clr-form-input-bg: var(--clr-200);
+  --clr-form-border: var(var(--clr-500));
+
   --max-width: 900px;
   --side-padding: 1rem;
+
+  --input-task-width: 70%;
 }
 
-/******************************
+/******************************************************
 * Page setup
-*******************************/
+*******************************************************/
 
 body {
   font-family: var(--ff-primary);
@@ -126,9 +135,9 @@ body {
   margin: 0 auto;
 }
 
-/******************************
+/******************************************************
 * Header
-*******************************/
+*******************************************************/
 
 .page-header {
   background-color: var(--clr-800);
@@ -140,9 +149,9 @@ body {
   color: var(--clr-50);
 }
 
-/******************************
+/******************************************************
 * todo list
-*******************************/
+*******************************************************/
 
 .todo-content {
   margin-top: 3rem;
@@ -150,78 +159,274 @@ body {
 
 .form-row {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .form-row > input[type="text"] {
   border: 1px solid var(--clr-300);
-  width: 70%;
+  width: var(--input-task-width);
   background-color: var(--clr-100);
 
-  padding: 0.5rem;
+  padding: 1rem 1.25rem;
   border-radius: 5px;
 }
 
 .form-row > .submit-todo {
+  cursor: pointer;
   background-color: var(--clr-800);
   color: var(--clr-100);
   font-weight: 700;
   text-transform: uppercase;
   border: none;
   border-radius: 5px;
-  font-size: 1rem;
+  font-size: var(--fs-button);
   max-width: 15%;
 
   flex: 1;
   margin: 0 1rem;
 }
 
-.todo-list {
-  list-style-type: none;
-}
-
 .list-item {
-  display: flex;
   font-size: 1.25rem;
+  margin-top: 0.75rem;
+}
+
+.list-item > .title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.accordian {
+  background-color: var(--clr-200);
+  color: #000;
+  cursor: pointer;
+  padding: 1.25rem;
+  width: var(--input-task-width);
+  text-align: left;
+  border: 1px solid var(--clr-300);
+  border-radius: 5px;
+  transition: 0.4s;
+}
+
+.active,
+.accordion:hover {
+  background-color: var(--clr-400);
+}
+
+.panel {
+  padding: 0 1.25rem;
+  background-color: #fff;
+
+  width: var(--input-task-width);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.title-row > .due-date {
+  margin: 0 1rem;
+
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+
+  flex: 1;
+  margin: 0 1rem;
+}
+
+.delete-btn {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+img {
+  height: auto;
+  width: 2rem;
+  margin: 0 auto;
+}
+
+/******************************************************
+* Accordian
+*******************************************************/
+
+/* .accordion:after {
+  Unicode character for "plus" sign (+)
+  content: "\02795";
+  font-size: 13px;
+  color: #777;
+  margin-left: 5px;
+}
+
+.active:after {
+  Unicode character for "minus" sign (-)
+  content: "\2796";
+} */
+/***************** Modal *****************/
+.modal {
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+
+  --max-width: 48rem;
+  --side-padding: 1rem;
+
+  height: 60%;
+  width: min(var(--max-width), 100% - var(--side-padding) * 2);
+  padding: 2rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal h2 {
+  font-size: var(--fs-header-secondary);
+  font-weight: var(--fw-bold);
+  color: var(--clr-950);
+}
+
+.modal-close {
+  position: absolute;
+
+  top: 0.3rem;
+  right: 0.3rem;
+
+  padding: 1rem;
+  border: none;
+  height: 1rem;
+  width: 1rem;
+
+  text-indent: 10em;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.modal-close::after {
+  position: absolute;
+  line-height: 0.5;
+  top: 0.3rem;
+  right: 0.3rem;
+  text-indent: 0;
+  font-size: 2.5rem;
+  cursor: pointer;
+
+  content: "\00d7";
+}
+
+/***************** Form *****************/
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+}
+
+.form-row label,
+.legend {
+  color: var(--clr-950);
+  font-size: var(--fs-label);
+}
+
+.form-row > input[type="text"],
+textarea {
+  border: none;
+  width: 100%;
+  background-color: var(--clr-form-input-bg);
+
+  padding: 0.5rem 0.5rem;
+  border-radius: 5px;
+}
+
+.form-row > input[type="text"]:focus,
+textarea:focus {
+  outline: 2px solid var(--clr-form-border);
+}
+
+textarea {
+  resize: vertical;
+  overflow: auto;
+}
+
+/* button */
+
+.submit-modal-form {
+  background-color: var(--clr-950);
+  color: #fff;
+  border: none;
+  font-size: var(--fs-button);
+  font-weight: var(--fw-bold);
+
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+
+  /* justify-self: flex-end; */
+
+  margin-top: 3.25rem;
+}
+
+.submit-modal-form:hover {
+  background-color: #fff;
+  color: var(--clr-950);
+  cursor: pointer;
+  outline: 2px solid var(--clr-950);
+}
+
+/************ Priority fieldset ************/
+
+.priority-section {
+  margin-top: 1.5rem;
+  border: 1px solid var(--clr-500);
+  border-radius: 3px;
+
+  padding: 1rem 0;
+}
+
+.legend {
+  margin-left: 0.5rem;
+  padding-inline: 0.25rem;
+}
+
+.radio-row {
+  display: flex;
+  gap: 1.5rem;
+
   margin-top: 0.5rem;
+  font-size: 1rem;
+  color: var(--clr-950);
 }
 
-.list-item > :not(:first-child) {
-  margin-left: 1rem;
-}
-
-.list-item > .todo-id {
-}
-
-/******************************
-* checkboxes
-*******************************/
-
-/* .form-row.checkbox {
-  flex-direction: row;
-  gap: 0.5rem;
+/* input[type="radio"] {
+  appearance: none;
 } */
 
-input[type="checkbox"] {
-  appearance: none;
-}
-
-input[type="checkbox"] {
+/* 
+input[type="radio"] {
   position: relative;
   width: 1.25rem;
   height: 1.25rem;
   align-self: center;
 
-  border: 2px solid var(--clr-500);
+  border: 2px solid var(--clr-form-border);
   border-radius: 50%;
 
-  color: var(--clr-500);
+  color: var(--clr-950);
 }
 
-input[type="checkbox"]::before {
-  content: " ";
-  background-color: var(--clr-500);
-  height: 0.85rem;
+input[type="radio"]::before {
+  content: "X ";
+  background-color: var(--clr-form-border);
+  height: 0.9rem;
   width: 0.9rem;
   position: absolute;
   font-size: 1.5rem;
@@ -234,7 +439,12 @@ input[type="checkbox"]::before {
   visibility: hidden;
 }
 
-input[type="checkbox"]:checked::before {
-  /* Use `visibility` instead of `display` to avoid recalculating layout */
+input[type="radio"]:checked::before {
   visibility: visible;
-}
+} */
+
+/* input[type="radio"]:disabled {
+  border-color: black;
+  background: #ddd;
+  color: gray;
+} */

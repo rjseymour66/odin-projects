@@ -11,38 +11,96 @@
 
 <body>
     <div id="content">
+
         <!-- header -->
+
         <header class="page-header">
             <h1 class="header-heading">Todos</h1>
         </header>
 
         <!-- todo content -->
-
         <div class="todo-content">
-            <form class="input form-row">
+            <form class="form-row">
                 <input type="text" name="input-todo" id="input-todo">
-                <button type="submit" class="submit-todo">Add todo</button>
+                <button type="button" class="submit-todo">Add todo</button>
             </form>
-            <ul class="todo-list">
-                <li class="list-item" data-row="1">
-                    <input type="checkbox" name="status" id="status" checked>
-                    <span class="todo-id">1</span>
-                    <p class="todo-text">Walk the dog</p>
-                </li>
-                <li class="list-item" data-row="2">
-                    <input type="checkbox" name="status" id="status" checked>
-                    <span class="todo-id">2</span>
-                    <p class="todo-text">Do laundry</p>
-                </li>
-                <li class="list-item" data-row="3">
-                    <input type="checkbox" name="status" id="status" checked>
-                    <span class="todo-id">3</span>
-                    <p class="todo-text">Grocery shop</p>
-                </li>
-            </ul>
-        </div>
-    </div>
 
+            <!-- accordian test -->
+
+
+            <div class="todo-list">
+                <div class="list-item">
+                    <div class="title-row">
+                        <button class="accordian">Task title</button>
+                        <span class="due-date">Dec 25, 2023</span>
+                        <button class="delete-btn"><img class="delete-icon" src="./assets/trashcan.svg"></button>
+
+                    </div>
+                    <div class="panel">
+                        <p>Walk the dogs around the block until they use the bathroom. Walk the dogs around the block
+                            until they use the bathroom. Walk the dogs around the block until they use the bathroom.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- dialog -->
+        <dialog class="modal">
+
+            <h2>Add a task</h2>
+            <button class="modal-close">Close</button>
+
+
+
+            <form action="#" method="post" class="form">
+                <div class="form-row">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" required>
+                </div>
+                <div class="form-row">
+                    <label for="description">Description</label>
+
+                    <textarea name="description" id="description" rows="5" required></textarea>
+                </div>
+                <div class="form-row">
+                    <label for="due-date">Due date</label>
+                    <input type="date" name="due-date" id="due-date" min="1" required>
+                </div>
+
+                <!-- Priority fieldset -->
+
+                <fieldset class="priority-section">
+                    <legend class="legend">Priority</legend>
+
+                    <div class="radio-row">
+                        <input class="radio" type="radio" id="important" name="priority" value="important">
+                        <label for="important">Important</label>
+                    </div>
+
+                    <div class="radio-row">
+                        <input class="radio" type="radio" id="normal" name="priority" value="normal" checked>
+                        <label for="normal">Normal</label>
+                    </div>
+
+                    <div class="radio-row">
+                        <input class="radio" type="radio" id="backlog" name="priority" value="backlog">
+                        <label for="backlog">Backlog</label>
+                    </div>
+
+                </fieldset>
+
+
+
+
+
+                <button type="submit" class="submit-modal-form btn">Add Todo</button>
+            </form>
+
+        </dialog>
+
+
+    </div>
 
 
 </body>
