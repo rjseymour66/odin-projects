@@ -93,7 +93,7 @@ textarea {
 
   --ff-primary: "Roboto", sans-serif;
 
-  --fs-header: 5rem;
+  --fs-header: 2rem;
   --fs-secondary-header: 1.75rem;
   --fs-todo: 1.5rem;
   --fs-label: 1.25rem;
@@ -120,7 +120,9 @@ textarea {
   --max-width: 900px;
   --side-padding: 1rem;
 
-  --input-task-width: 70%;
+  --section-padding: 1rem 0 0 2rem;
+
+  --input-task-width: 60%;
 }
 
 /******************************************************
@@ -129,14 +131,12 @@ textarea {
 
 body {
   font-family: var(--ff-primary);
-  height: 100%;
 }
 
-.header-heading,
-.todo-content {
+/* .header-heading {
   width: min(var(--max-width), 100% - var(--side-padding) * 2);
   margin: 0 auto;
-}
+} */
 
 /******************************************************
 * Grid
@@ -152,6 +152,13 @@ body {
 .page-header {
   grid-column: 1 / -1;
   grid-row: 1 / 2;
+
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+
+.header-heading {
+  grid-column: 2 / -1;
 }
 
 .projects-sidebar {
@@ -180,6 +187,7 @@ body {
 
 .header-heading {
   font-size: var(--fs-header);
+  font-weight: var(--fw-bold);
   color: var(--clr-50);
 }
 
@@ -189,7 +197,7 @@ body {
 
 .projects-sidebar {
   background-color: var(--clr-grey);
-  padding: 1rem 0 0 2rem;
+  padding: var(--section-padding);
 }
 
 .projects-heading {
@@ -219,7 +227,7 @@ body {
   margin-top: 0.75rem;
   padding: 1rem;
   text-transform: uppercase;
-  border: 1px solid #fff;
+  border: none;
   border-radius: 5px;
   background-color: var(--clr-950);
   color: #fff;
@@ -228,87 +236,104 @@ body {
 * Todo section
 *******************************************************/
 
-/******************************************************
-* footer
-*******************************************************/
-
-.footer {
-  background-color: var(--clr-950);
-}
-/******************************************************
-* Todo modal
-*******************************************************/
-
-/******************************************************
-* Project modal
-*******************************************************/
-
-/******************************************************
-* todo list
-*******************************************************/
-
 .todo-content {
-  margin-top: 3rem;
+  padding: var(--section-padding);
 }
 
-.form-row {
+.todo-nav {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: center;
 }
 
-.form-row > input[type="text"] {
-  border: 1px solid var(--clr-300);
-  width: var(--input-task-width);
-  background-color: var(--clr-100);
-
-  padding: 1rem 1.25rem;
-  border-radius: 5px;
-}
-
-.form-row > .submit-todo {
-  cursor: pointer;
-  background-color: var(--clr-800);
-  color: var(--clr-100);
-  font-weight: 700;
+.add-todo {
+  padding: 1rem;
   text-transform: uppercase;
   border: none;
   border-radius: 5px;
-  font-size: var(--fs-button);
-  max-width: 15%;
+  background-color: var(--clr-950);
+  color: #fff;
 
+  /* margin-right: auto; */
+  /* justify-self: left; */
+}
+
+.priority-list {
+  list-style-type: none;
+
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.priority-category {
   flex: 1;
-  margin: 0 1rem;
+}
+
+.priority-btn {
+  padding: 1rem;
+  border: 2px solid var(--clr-950);
+  border-radius: 5px;
+  background-color: #fff;
+
+  width: 8rem;
+}
+
+.priority-btn:hover {
+  background-color: var(--clr-950);
+  color: #fff;
+}
+
+.todo-list {
+  /* text-align: center; */
 }
 
 .list-item {
-  font-size: 1.25rem;
-  margin-top: 0.75rem;
+  margin-top: 1rem;
 }
 
-.list-item > .title-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.task-title,
+.due-date {
+  font-size: var(--fs-todo);
+  /* margin-right: 1rem; */
 }
 
-.accordian {
+img {
+  height: auto;
+  width: 2rem;
+  /* margin: 0 auto; */
+}
+
+.task-right {
+  /* margin-left: 8rem; */
+  text-align: right;
+}
+
+.task-icon {
+  display: inline-block;
+}
+
+/*********************
+* accordian
+*/
+
+.task-collapsed {
   background-color: var(--clr-200);
   color: #000;
   cursor: pointer;
   padding: 1.25rem;
   width: var(--input-task-width);
-  text-align: left;
+  /* text-align: left; */
   border: 1px solid var(--clr-300);
   border-radius: 5px;
   transition: 0.4s;
 }
 
 .active,
-.accordion:hover {
+.task-collapsed:hover {
   background-color: var(--clr-400);
 }
 
-.panel {
+.task-expanded {
   padding: 0 1.25rem;
   background-color: #fff;
 
@@ -316,36 +341,9 @@ body {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
+
+  /* text-align: center; */
 }
-
-.title-row > .due-date {
-  margin: 0 1rem;
-
-  font-weight: 700;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-
-  flex: 1;
-  margin: 0 1rem;
-}
-
-.delete-btn {
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-}
-
-img {
-  height: auto;
-  width: 2rem;
-  margin: 0 auto;
-}
-
-/******************************************************
-* Accordian
-*******************************************************/
 
 /* .accordion:after {
   Unicode character for "plus" sign (+)
@@ -359,7 +357,28 @@ img {
   Unicode character for "minus" sign (-)
   content: "\2796";
 } */
-/***************** Modal *****************/
+
+/******************************************************
+* footer
+*******************************************************/
+
+.footer {
+  background-color: var(--clr-950);
+}
+
+.icon-list {
+  display: flex;
+  gap: 2rem;
+
+  list-style-type: none;
+  padding: 0.5rem 0;
+
+  justify-content: center;
+}
+/******************************************************
+* Todo modal
+*******************************************************/
+
 .modal {
   top: 50%;
   left: 50%;
@@ -464,8 +483,6 @@ textarea {
   padding: 0.5rem 1.5rem;
   border-radius: 5px;
 
-  /* justify-self: flex-end; */
-
   margin-top: 3.25rem;
 }
 
@@ -542,3 +559,7 @@ input[type="radio"]:checked::before {
   background: #ddd;
   color: gray;
 } */
+
+/******************************************************
+* Project modal
+*******************************************************/

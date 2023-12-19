@@ -34,21 +34,71 @@
         <!-- todo content -->
 
         <main class="todo-content">
-            <button type="button" class="submit-todo">Add todo &#43;</button>
-            <ul class="priority-list">
-                <li class="priority-category all-categories">All</li>
-                <li class="priority-category important-category">Important</li>
-                <li class="priority-category normal-category">Normal</li>
-                <li class="priority-category backlog-category">Backlog</li>
-            </ul>
+
+            <div class="todo-nav">
+                <button type="button" class="add-todo">Add todo &#43;</button>
+
+                <ul class="priority-list">
+                    <li class="priority-category all-categories"><button type="button" class="priority-btn">All</button>
+                    </li>
+                    <li class="priority-category important-category"><button type="button"
+                            class="priority-btn">Important</button></li>
+                    <li class="priority-category normal-category"><button type="button"
+                            class="priority-btn">Normal</button>
+                    </li>
+                    <li class="priority-category backlog-category"><button type="button"
+                            class="priority-btn">Backlog</button></li>
+                </ul>
+            </div>
 
             <!-- todo section w/accordian -->
 
             <div class="todo-list">
+
                 <div class="list-item">
-                    <button class="task-collapsed">Task title <span class="due-date">12/25/2023</span><img
-                            src="./assets/edit.svg" alt="edit todo" class="edit-icon"><img src="./assets/trashcan.svg"
-                            alt="delete todo" class="delete-icon"></button>
+
+                    <button class="task-collapsed">
+                        <span class="task-title">Task title</span>
+                        <span class="due-date">12/25/2023</span>
+
+                    </button>
+                    <img class="task-icon task-right" src="./assets/edit.svg" alt="edit todo" class="edit-icon">
+                    <img class="task-icon" src="./assets/trashcan.svg" alt="delete todo" class="delete-icon">
+                    <div class="task-expanded">
+                        <p>
+                            Walk the dogs around the block until they use the bathroom. Walk the dogs around the block
+                            until they use the bathroom. Walk the dogs around the block until they use the bathroom.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="list-item">
+
+                    <button class="task-collapsed">
+                        <span class="task-title">Task title</span>
+                        <span class="due-date">12/25/2023</span>
+
+                    </button>
+                    <img class="task-icon task-right" src="./assets/edit.svg" alt="edit todo" class="edit-icon">
+                    <img class="task-icon" src="./assets/trashcan.svg" alt="delete todo" class="delete-icon">
+                    <div class="task-expanded">
+                        <p>
+                            Walk the dogs around the block until they use the bathroom. Walk the dogs around the block
+                            until they use the bathroom. Walk the dogs around the block until they use the bathroom.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="list-item">
+
+                    <button class="task-collapsed">
+                        <span class="task-title">Task title</span>
+                        <span class="due-date">12/25/2023</span>
+
+                    </button>
+                    <img class="task-icon task-right" src="./assets/edit.svg" alt="edit todo" class="edit-icon">
+                    <img class="task-icon" src="./assets/trashcan.svg" alt="delete todo" class="delete-icon">
                     <div class="task-expanded">
                         <p>
                             Walk the dogs around the block until they use the bathroom. Walk the dogs around the block
