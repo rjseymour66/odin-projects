@@ -18,40 +18,62 @@
             <h1 class="header-heading">Todos</h1>
         </header>
 
+        <!-- project sidebar -->
+
+        <aside class="projects-sidebar">
+            <h2 class="projects-heading">Projects</h2>
+            <button type="button" class="add-project-btn">Add project &#43;</button>
+            <ul class="project-list">
+                <li class="project-item">Project 1</li>
+                <li class="project-item">Project 2</li>
+                <li class="project-item">Project 3</li>
+            </ul>
+        </aside>
+
+
         <!-- todo content -->
-        <div class="todo-content">
-            <form class="form-row">
-                <input type="text" name="input-todo" id="input-todo">
-                <button type="button" class="submit-todo">Add todo</button>
-            </form>
 
-            <!-- accordian test -->
+        <main class="todo-content">
+            <button type="button" class="submit-todo">Add todo &#43;</button>
+            <ul class="priority-list">
+                <li class="priority-category all-categories">All</li>
+                <li class="priority-category important-category">Important</li>
+                <li class="priority-category normal-category">Normal</li>
+                <li class="priority-category backlog-category">Backlog</li>
+            </ul>
 
+            <!-- according -->
 
             <div class="todo-list">
                 <div class="list-item">
-                    <div class="title-row">
-                        <button class="accordian">Task title</button>
-                        <span class="due-date">Dec 25, 2023</span>
-                        <button class="delete-btn"><img class="delete-icon" src="./assets/trashcan.svg"></button>
-
-                    </div>
-                    <div class="panel">
-                        <p>Walk the dogs around the block until they use the bathroom. Walk the dogs around the block
-                            until they use the bathroom. Walk the dogs around the block until they use the bathroom.</p>
+                    <button class="task-collapsed">Task title <span class="due-date">12/25/2023</span><img
+                            src="./assets/edit.svg" alt="edit todo" class="edit-icon"><img src="./assets/trashcan.svg"
+                            alt="delete todo" class="delete-icon"></button>
+                    <div class="task-expanded">
+                        <p>
+                            Walk the dogs around the block until they use the bathroom. Walk the dogs around the block
+                            until they use the bathroom. Walk the dogs around the block until they use the bathroom.
+                        </p>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
+
+        <footer class="footer">
+            <ul class="icon-list">
+                <li><img src="./assets/github-mark.svg" alt="github"></li>
+                <li><img src="./assets/linkedin.svg" alt="linkedin"></li>
+                <li><img src="./assets/facebook.svg" alt="facebook"></li>
+            </ul>
+        </footer>
 
 
         <!-- dialog -->
+
         <dialog class="modal">
 
             <h2>Add a task</h2>
             <button class="modal-close">Close</button>
-
-
 
             <form action="#" method="post" class="form">
                 <div class="form-row">
@@ -90,17 +112,10 @@
 
                 </fieldset>
 
-
-
-
-
                 <button type="submit" class="submit-modal-form btn">Add Todo</button>
             </form>
 
         </dialog>
-
-
-    </div>
 
 
 </body>

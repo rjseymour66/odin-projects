@@ -2,25 +2,25 @@
     {
         "title": "Walk the dogs",
         "description": "Walk the dogs around the block until they use the bathroom.",
-        "dueDate": "10",
-        "priority": "1"
+        "dueDate": "Dec 18, 2023",
+        "priority": "important"
     },
     {
         "title": "Do the dishes",
         "description": "Run the dishwasher",
-        "dueDate": "15",
-        "priority": "3"
+        "dueDate": "Dec 24, 2023",
+        "priority": "normal"
     },
     {
         "title": "Laundry",
         "description": "Wash and dry all laundry. Hang pants and sweaters to air dry.",
-        "dueDate": "12",
-        "priority": "4"
+        "dueDate": "Dec 31, 2023",
+        "priority": "backlog"
     },
     {
         "title": "Groceries",
         "description": "Get groceries for the week, including snacks, lunch, and dinner.",
-        "dueDate": "12",
-        "priority": "2"
+        "dueDate": "Dec 19, 2023",
+        "priority": "important"
     }
 ]
