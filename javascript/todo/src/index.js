@@ -60,8 +60,8 @@ accordians.forEach(acc => {
     acc.addEventListener('click', () => {
         acc.classList.toggle('active');
 
-        const panel = acc.nextElementSibling
-            .nextElementSibling
+        const panel = acc.parentElement
+            // .nextElementSibling
             .nextElementSibling;
 
         panel.style.maxHeight ? panel.style.maxHeight = null : panel.style.maxHeight = panel.scrollHeight + "px";
@@ -73,29 +73,45 @@ accordians.forEach(acc => {
 ///////////////////////////////////////////////
 // Modal
 
-const modal = document.querySelector(".modal");
-const closeModal = document.querySelector(".modal-close");
+const taskModal = document.querySelector('#task-modal');
+const closeTaskModal = document.querySelector('#close-task-modal');
+
+const projectModal = document.querySelector('#project-modal');
+const closeProjectModal = document.querySelector('#close-project-modal');
+
 const addTodo = document.querySelector(".submit-todo");
 const submitModal = document.querySelector(".submit-modal-form");
 
-// modal.showModal();
+// taskModal.showModal();
+// projectModal.showModal();
 
-addTodo.addEventListener('click', (e) => {
-    modal.showModal();
+closeTaskModal.addEventListener('click', () => {
+    taskModal.close();
+});
+
+closeProjectModal.addEventListener('click', () => {
+    projectModal.close();
 });
 
 
+// addTodo.addEventListener('click', (e) => {
+//     modal.showModal();
+// });
 
 
 
-closeModal.addEventListener("click", () => {
-    modal.close();
-});
+// closeModal.addEventListener("click", () => {
+//     modal.close();
+// });
 
+// modals.forEach(m => {
+//     m.addEventListener('click', () => {
+//         m.showModal();
+//     });
+// });
 
-
-// let resetUI = () => {
-//     while (tableBody.firstChild) {
-//         tableBody.removeChild(tableBody.firstChild);
-//     }
-// };
+// closeModals.forEach(cm => {
+//     cm.addEventListener('click', () => {
+//         cm.showModal();
+//     });
+// });

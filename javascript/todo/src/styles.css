@@ -95,7 +95,7 @@ textarea {
 
   --fs-header: 2rem;
   --fs-secondary-header: 1.75rem;
-  --fs-todo: 1.5rem;
+  --fs-todo: 1rem;
   --fs-label: 1.25rem;
   --fs-button: 1rem;
 
@@ -120,9 +120,12 @@ textarea {
   --max-width: 900px;
   --side-padding: 1rem;
 
+  --max-width-todo: 80%;
+
   --section-padding: 1rem 0 0 2rem;
 
-  --input-task-width: 60%;
+  /* --input-task-width: 60%; */
+  --task-padding: 0.5rem 0 0.5rem 1.75rem;
 }
 
 /******************************************************
@@ -210,6 +213,7 @@ body {
 
 .project-item {
   margin-top: 0.75rem;
+  flex-grow: 1;
 }
 
 .project-item > button {
@@ -217,6 +221,11 @@ body {
   padding-inline: 0 1rem;
   border: none;
   background-color: red;
+  width: 100%;
+
+  text-align: left;
+
+  /* border-radius: 10px; */
 }
 
 .project-item > button:hover {
@@ -225,7 +234,7 @@ body {
 
 .add-project-btn {
   margin-top: 0.75rem;
-  padding: 1rem;
+  padding: 0.75rem;
   text-transform: uppercase;
   border: none;
   border-radius: 5px;
@@ -237,36 +246,44 @@ body {
 *******************************************************/
 
 .todo-content {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
+
   padding: var(--section-padding);
 }
 
 .todo-nav {
-  display: flex;
-  justify-content: center;
+  width: var(--max-width-todo);
+  margin: 0 auto;
+
+  background-color: orange;
 }
 
 .add-todo {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+
   padding: 1rem;
   text-transform: uppercase;
   border: none;
   border-radius: 5px;
   background-color: var(--clr-950);
   color: #fff;
-
-  /* margin-right: auto; */
-  /* justify-self: left; */
 }
 
 .priority-list {
+  grid-column: 2 / -1;
+  grid-row: 1 / 2;
+
   list-style-type: none;
 
   display: flex;
   gap: 2rem;
-  justify-content: center;
-}
+  /* justify-content: space-between; */
+  justify-content: flex-start;
 
-.priority-category {
-  flex: 1;
+  border: 1px solid green;
 }
 
 .priority-btn {
@@ -284,28 +301,30 @@ body {
 }
 
 .todo-list {
-  /* text-align: center; */
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+
+  max-width: var(--max-width-todo);
+  margin: 0 auto;
+
+  background-color: lightcoral;
 }
 
 .list-item {
   margin-top: 1rem;
+  font-size: var(--fs-todo);
+  background-color: #7e22ce;
 }
 
-.task-title,
-.due-date {
-  font-size: var(--fs-todo);
-  /* margin-right: 1rem; */
+.list-flex {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
 }
 
 img {
   height: auto;
   width: 2rem;
-  /* margin: 0 auto; */
-}
-
-.task-right {
-  /* margin-left: 8rem; */
-  text-align: right;
 }
 
 .task-icon {
@@ -317,15 +336,29 @@ img {
 */
 
 .task-collapsed {
+  flex-grow: 1;
+  text-align: left;
+
   background-color: var(--clr-200);
   color: #000;
   cursor: pointer;
-  padding: 1.25rem;
-  width: var(--input-task-width);
-  /* text-align: left; */
+
+  padding: var(--task-padding);
   border: 1px solid var(--clr-300);
-  border-radius: 5px;
+
   transition: 0.4s;
+
+  position: relative;
+}
+
+.task-collapsed::before {
+  content: "\002b";
+  font-size: 1.15rem;
+  color: #000;
+
+  position: absolute;
+  top: 6px;
+  left: 10px;
 }
 
 .active,
@@ -333,30 +366,25 @@ img {
   background-color: var(--clr-400);
 }
 
+.active::before {
+  content: "\2212";
+  font-size: 1.15rem;
+  color: #000;
+
+  position: absolute;
+  top: 6px;
+  left: 10px;
+}
+
 .task-expanded {
-  padding: 0 1.25rem;
+  padding: 0 0 0 1.75rem;
   background-color: #fff;
 
   width: var(--input-task-width);
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
-
-  /* text-align: center; */
 }
-
-/* .accordion:after {
-  Unicode character for "plus" sign (+)
-  content: "\02795";
-  font-size: 13px;
-  color: #777;
-  margin-left: 5px;
-}
-
-.active:after {
-  Unicode character for "minus" sign (-)
-  content: "\2796";
-} */
 
 /******************************************************
 * footer
@@ -376,10 +404,10 @@ img {
   justify-content: center;
 }
 /******************************************************
-* Todo modal
+* Task modal
 *******************************************************/
 
-.modal {
+.task-modal {
   top: 50%;
   left: 50%;
   translate: -50% -50%;
@@ -517,49 +545,21 @@ textarea {
   color: var(--clr-950);
 }
 
-/* input[type="radio"] {
-  appearance: none;
-} */
-
-/* 
-input[type="radio"] {
-  position: relative;
-  width: 1.25rem;
-  height: 1.25rem;
-  align-self: center;
-
-  border: 2px solid var(--clr-form-border);
-  border-radius: 50%;
-
-  color: var(--clr-950);
-}
-
-input[type="radio"]::before {
-  content: "X ";
-  background-color: var(--clr-form-border);
-  height: 0.9rem;
-  width: 0.9rem;
-  position: absolute;
-  font-size: 1.5rem;
-
-  border-radius: 50%;
-
-  right: 1px;
-  top: 1px;
-
-  visibility: hidden;
-}
-
-input[type="radio"]:checked::before {
-  visibility: visible;
-} */
-
-/* input[type="radio"]:disabled {
-  border-color: black;
-  background: #ddd;
-  color: gray;
-} */
-
 /******************************************************
 * Project modal
 *******************************************************/
+
+.project-modal {
+  top: 50%;
+  left: 50%;
+  translate: -50% -80%;
+
+  --max-width: 38rem;
+  --side-padding: 1rem;
+
+  height: 30%;
+  width: min(var(--max-width), 100% - var(--side-padding) * 2);
+  padding: 2rem;
+  border: none;
+  border-radius: 5px;
+}
