@@ -1,16 +1,22 @@
 import { createHeader } from "./header";
 import { createProjectsSidebar } from "./project-sidebar";
+import { createMain } from "./main";
+import { createFooter } from "./footer";
 
 const initView = () => {
     const contentDiv = document.querySelector('#content');
 
     // create/append header
-    const header = createHeader();
-    contentDiv.appendChild(header);
+    contentDiv.appendChild(createHeader());
 
     // create/append sidebar
-    const projectSidebar = createProjectsSidebar();
-    contentDiv.appendChild(projectSidebar);
+    contentDiv.appendChild(createProjectsSidebar());
+
+    // create/append main
+    contentDiv.appendChild(createMain());
+
+    // create/append footer
+    contentDiv.appendChild(createFooter());
 };
 
 const View = () => {

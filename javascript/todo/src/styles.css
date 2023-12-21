@@ -120,7 +120,7 @@ textarea {
   --max-width: 900px;
   --side-padding: 1rem;
 
-  --max-width-todo: 80%;
+  --max-width-todo: 60%;
 
   --section-padding: 1rem 0 0 2rem;
 
@@ -236,6 +236,7 @@ body {
   margin-top: 0.75rem;
   padding: 0.75rem;
   text-transform: uppercase;
+  cursor: pointer;
   border: none;
   border-radius: 5px;
   background-color: var(--clr-950);
@@ -266,6 +267,7 @@ body {
 
   padding: 1rem;
   text-transform: uppercase;
+  cursor: pointer;
   border: none;
   border-radius: 5px;
   background-color: var(--clr-950);
@@ -291,6 +293,7 @@ body {
   border: 2px solid var(--clr-950);
   border-radius: 5px;
   background-color: #fff;
+  cursor: pointer;
 
   width: 8rem;
 }
@@ -325,6 +328,7 @@ body {
 img {
   height: auto;
   width: 2rem;
+  cursor: pointer;
 }
 
 .task-icon {
