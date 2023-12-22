@@ -35,6 +35,7 @@ const createAddProjectButton = () => {
     const button = document.createElement('button');
     button.classList.add('add-project-btn');
     button.textContent = 'Add project \u002b';
+    button.setAttribute('type', 'button');
 
     return button;
 };

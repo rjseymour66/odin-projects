@@ -94,6 +94,20 @@ View();
 ///////////////////////////////////////////////
 // Modal
 
+const taskModal = document.querySelector('#task-modal');
+
+document.addEventListener('DOMContentLoaded', () => {
+    // const taskModal = document.querySelector('#task-modal');
+    const closeTaskModal = document.querySelector('#close-task-modal');
+
+    closeTaskModal.addEventListener('click', () => {
+        taskModal.close();
+    });
+});
+
+taskModal.showModal();
+// // projectModal.showModal();
+
 // const taskModal = document.querySelector('#task-modal');
 // const closeTaskModal = document.querySelector('#close-task-modal');
 
