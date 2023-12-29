@@ -1,8 +1,13 @@
+import { Controller } from "./controller/controller.js";
 import { View } from "./view/view.js";
+import { Model } from "./model/model";
+
 import { createTodo } from "./model/todo.js";
 import { createProject } from "./model/projects.js";
 
-View();
+// why does this work?
+const app = Controller(Model, View);
+
 
 
 
@@ -109,8 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// todoModal.showModal();
-// projectModal.showModal();
+todoModal.showModal();
+projectModal.showModal();
 
 // const taskModal = document.querySelector('#task-modal');
 // const closeTaskModal = document.querySelector('#close-task-modal');

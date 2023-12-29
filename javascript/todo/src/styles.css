@@ -430,7 +430,8 @@ img {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.todo-modal h2 {
+.todo-modal h2,
+.project-modal h2 {
   font-size: var(--fs-secondary-header);
   font-weight: var(--fw-bold);
   color: var(--clr-950);
