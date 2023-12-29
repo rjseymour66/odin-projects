@@ -1,4 +1,5 @@
 import '../styles.css';
+import { RegisterCloseModal } from './event-listeners';
 
 const createFormLabel = (text, forVal) => {
     const label = document.createElement('label');
@@ -186,6 +187,19 @@ const createModal = (modalType) => {
         return button;
     };
 
+    // const RegisterCloseModal = (modalType) => {
+    //     document.addEventListener('DOMContentLoaded', () => {
+    //         const todoModal = document.querySelector(`#${modalType}-modal`);
+    //         const closeTodoModal = document.querySelector(`#close-${modalType}-modal`);
+
+    //         closeTodoModal.addEventListener('click', () => {
+    //             todoModal.close();
+    //         });
+    //     });
+    // };
+
+    RegisterCloseModal(modalType);
+
     dialog.appendChild(heading);
     dialog.appendChild(createCloseButton());
 
@@ -194,6 +208,7 @@ const createModal = (modalType) => {
 
 const createTodoModal = () => {
     const dialog = createModal('todo');
+    // RegisterCloseModal('todo');
     dialog.appendChild(createTodoModalForm());
 
     return dialog;
@@ -201,6 +216,7 @@ const createTodoModal = () => {
 
 const createProjectModal = () => {
     const dialog = createModal('project');
+    // RegisterCloseModal('project');
     dialog.appendChild(createProjectModalForm());
 
     return dialog;

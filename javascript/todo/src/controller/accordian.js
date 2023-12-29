@@ -1,3 +1,24 @@
+const todoModal = document.querySelector('#todo-modal');
+const projectModal = document.querySelector('#project-modal');
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // const todoModal = document.querySelector('#task-modal');
+    const closeTodoModal = document.querySelector('#close-todo-modal');
+
+    closeTodoModal.addEventListener('click', () => {
+        taskModal.close();
+    });
+
+
+});
+
+todoModal.showModal();
+projectModal.showModal();
+
+
+
+
 ///////////////////////////////////////////////
 // Accordian
 // https://www.w3schools.com/howto/howto_js_accordion.asp

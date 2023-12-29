@@ -1,4 +1,5 @@
 import todos from '../data/sample-data.json';
+import { RegisterOpenModal } from './event-listeners';
 
 // addtodo button
 const createAddTodoButton = () => {
@@ -109,14 +110,19 @@ const createTodoList = (todos) => {
     return listDiv;
 };
 
-
-
 const createMain = () => {
     const mainEl = document.createElement('main');
     mainEl.classList.add('todo-content');
 
     // create/append button
-    mainEl.appendChild(createAddTodoButton());
+    const addTodoBtn = createAddTodoButton();
+    // register event handler
+    RegisterOpenModal('todo');
+
+    mainEl.appendChild(addTodoBtn);
+
+
+
     mainEl.appendChild(createPriorityList());
 
     // create/append li
