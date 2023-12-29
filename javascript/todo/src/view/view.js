@@ -2,7 +2,7 @@ import { createHeader } from "./header";
 import { createProjectsSidebar } from "./project-sidebar";
 import { createMain } from "./main";
 import { createFooter } from "./footer";
-import { createModal } from "./modals";
+import { createTodoModal, createProjectModal } from "./modals";
 
 const initView = () => {
     const contentDiv = document.querySelector('#content');
@@ -20,10 +20,12 @@ const initView = () => {
     contentDiv.appendChild(createFooter());
 
     // create/append add task modal
-    contentDiv.appendChild(createModal('task'));
+    // contentDiv.appendChild(createModal('todo', createTodoModalForm()));
 
+    contentDiv.appendChild(createTodoModal());
 
     // create/append add project modal
+    contentDiv.appendChild(createProjectModal());
 };
 
 const View = () => {
