@@ -1,12 +1,12 @@
 import { Controller } from "./controller/controller.js";
-import { View } from "./view/view.js";
+import { createView } from "./view/view.js";
 import { Model } from "./model/model";
 
 import { createTodo } from "./model/todo.js";
 import { createProject } from "./model/projects.js";
 
 // why does this work?
-const app = Controller(Model, View);
+const app = Controller(Model, createView);
 
 
 

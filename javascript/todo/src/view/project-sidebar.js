@@ -1,6 +1,3 @@
-import { RegisterOpenModal } from './event-listeners';
-
-
 const createProjectsSidebarHeading = () => {
     const h2 = document.createElement('h2');
     h2.classList.add('projects-heading');
@@ -64,7 +61,7 @@ const createProjectsSidebar = () => {
 
     // create button
     const addProjectButton = createAddProjectButton();
-    RegisterOpenModal('project');
+
     // append button to asideEl
     asideEl.appendChild(addProjectButton);
 

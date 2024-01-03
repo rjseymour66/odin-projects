@@ -4,37 +4,59 @@ import { createMain } from "./main";
 import { createFooter } from "./footer";
 import { createTodoModal, createProjectModal } from "./modals";
 
-const initView = () => {
-    const contentDiv = document.querySelector('#content');
+const createView = () => {
 
-    // create/append header
-    contentDiv.appendChild(createHeader());
+    const header = createHeader();
+    const sidebar = createProjectsSidebar();
+    const main = createMain();
+    const footer = createFooter();
+    const todoModal = createTodoModal();
+    const projectModal = createProjectModal();
 
-    // create/append sidebar
-    contentDiv.appendChild(createProjectsSidebar());
+    // open modal by type
+    const RegisterOpenModal = (modalType) => {
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.querySelector(`#${modalType}-modal`);
+            const button = document.querySelector(`.add-${modalType}`);
 
-    // create/append main
-    contentDiv.appendChild(createMain());
 
-    // create/append footer
-    contentDiv.appendChild(createFooter());
+            button.addEventListener('click', () => {
+                modal.showModal();
+            });
+        });
+    };
 
-    // create/append add task modal
-    // contentDiv.appendChild(createModal('todo', createTodoModalForm()));
+    // close modal by type
+    const RegisterCloseModal = (modalType) => {
+        document.addEventListener('DOMContentLoaded', () => {
+            const todoModal = document.querySelector(`#${modalType}-modal`);
+            const closeTodoModal = document.querySelector(`#close-${modalType}-modal`);
 
-    contentDiv.appendChild(createTodoModal());
+            closeTodoModal.addEventListener('click', () => {
+                todoModal.close();
+            });
+        });
+    };
 
-    // create/append add project modal
-    contentDiv.appendChild(createProjectModal());
-};
+    const initListeners = () => {
+        RegisterOpenModal('todo');
+        RegisterCloseModal('todo');
+        RegisterOpenModal('project');
+        RegisterCloseModal('project');
+    };
 
-const View = () => {
+    const initView = () => {
+        const contentDiv = document.querySelector('#content');
+        contentDiv.appendChild(header);
+        contentDiv.appendChild(sidebar);
+        contentDiv.appendChild(main);
+        contentDiv.appendChild(footer);
+        contentDiv.appendChild(todoModal);
+        contentDiv.appendChild(projectModal);
+    };
+
     initView();
-
-    // const displayTodos = (data) => {
-
-    // };
-
+    initListeners();
 };
 
-export { View };
+export { createView };

@@ -1,5 +1,4 @@
-import todos from '../data/sample-data.json';
-import { RegisterOpenModal } from './event-listeners';
+import todos from '../data/todo-data.json';
 
 // addtodo button
 const createAddTodoButton = () => {
@@ -116,13 +115,8 @@ const createMain = () => {
 
     // create/append button
     const addTodoBtn = createAddTodoButton();
-    // register event handler
-    RegisterOpenModal('todo');
 
     mainEl.appendChild(addTodoBtn);
-
-
-
     mainEl.appendChild(createPriorityList());
 
     // create/append li
