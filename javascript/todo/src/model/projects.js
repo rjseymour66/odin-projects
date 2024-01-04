@@ -1,5 +1,3 @@
-import { createTodo } from "./todo";
-
 const createProject = (projName) => {
     let name = projName;
     let todos = [];

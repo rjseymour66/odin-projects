@@ -4,6 +4,33 @@ import { createMain } from "./main";
 import { createFooter } from "./footer";
 import { createTodoModal, createProjectModal } from "./modals";
 
+const projects = ['Project 1', 'Project 2', 'Project 3'];
+
+// open modal by type
+const RegisterOpenModal = (modalType) => {
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.querySelector(`#${modalType}-modal`);
+        const button = document.querySelector(`.add-${modalType}`);
+
+
+        button.addEventListener('click', () => {
+            modal.showModal();
+        });
+    });
+};
+
+// close modal by type
+const RegisterCloseModal = (modalType) => {
+    document.addEventListener('DOMContentLoaded', () => {
+        const todoModal = document.querySelector(`#${modalType}-modal`);
+        const closeTodoModal = document.querySelector(`#close-${modalType}-modal`);
+
+        closeTodoModal.addEventListener('click', () => {
+            todoModal.close();
+        });
+    });
+};
+
 const createView = () => {
 
     const header = createHeader();
@@ -12,31 +39,6 @@ const createView = () => {
     const footer = createFooter();
     const todoModal = createTodoModal();
     const projectModal = createProjectModal();
-
-    // open modal by type
-    const RegisterOpenModal = (modalType) => {
-        document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.querySelector(`#${modalType}-modal`);
-            const button = document.querySelector(`.add-${modalType}`);
-
-
-            button.addEventListener('click', () => {
-                modal.showModal();
-            });
-        });
-    };
-
-    // close modal by type
-    const RegisterCloseModal = (modalType) => {
-        document.addEventListener('DOMContentLoaded', () => {
-            const todoModal = document.querySelector(`#${modalType}-modal`);
-            const closeTodoModal = document.querySelector(`#close-${modalType}-modal`);
-
-            closeTodoModal.addEventListener('click', () => {
-                todoModal.close();
-            });
-        });
-    };
 
     const initListeners = () => {
         RegisterOpenModal('todo');
@@ -57,6 +59,10 @@ const createView = () => {
 
     initView();
     initListeners();
+
+    return {
+        createProjectsSidebar
+    };
 };
 
 export { createView };

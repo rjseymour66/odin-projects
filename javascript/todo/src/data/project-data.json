@@ -1,28 +1,68 @@
-// [
-//     "Project 1", 
-//         {
-//             "title": "Groceries",
-//             "description": "Get groceries for the week, including snacks, lunch, and dinner.",
-//             "dueDate": "Dec 19, 2023",
-//             "priority": "important"
-//         },
-//         "Project 2", 
-//         {
-//             "title": "Groceries",
-//             "description": "Get groceries for the week, including snacks, lunch, and dinner.",
-//             "dueDate": "Dec 19, 2023",
-//             "priority": "important"
-//         }
-// ],
-
 [
-    [
-        "test",
-        {
-            "title": "Groceries",
-            "description": "Get groceries for the week, including snacks, lunch, and dinner.",
-            "dueDate": "Dec 19, 2023",
-            "priority": "important"
-        }
-    ],
+    {
+        "id": "1",
+        "name": "Project 1",
+        "todos": [
+            {
+                "title": "Walk the dogs",
+                "description": "Walk the dogs around the block until they use the bathroom.",
+                "dueDate": "Dec 18, 2023",
+                "priority": "important"
+            },
+            {
+                "title": "Do the dishes",
+                "description": "Run the dishwasher",
+                "dueDate": "Dec 24, 2023",
+                "priority": "normal"
+            },
+            {
+                "title": "Groceries",
+                "description": "Get groceries for the week, including snacks, lunch, and dinner.",
+                "dueDate": "Dec 19, 2023",
+                "priority": "important"
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "name": "Project 2",
+        "todos": [
+            {
+                "title": "Walk the dogs",
+                "description": "Walk the dogs around the block until they use the bathroom.",
+                "dueDate": "Dec 18, 2023",
+                "priority": "important"
+            },
+            {
+                "title": "Laundry",
+                "description": "Wash and dry all laundry. Hang pants and sweaters to air dry.",
+                "dueDate": "Dec 31, 2023",
+                "priority": "backlog"
+            },
+            {
+                "title": "Groceries",
+                "description": "Get groceries for the week, including snacks, lunch, and dinner.",
+                "dueDate": "Dec 19, 2023",
+                "priority": "important"
+            }
+        ]
+    },
+    {
+        "id": "3",
+        "name": "Project 3",
+        "todos": [
+            {
+                "title": "Walk the dogs",
+                "description": "Walk the dogs around the block until they use the bathroom.",
+                "dueDate": "Dec 18, 2023",
+                "priority": "important"
+            },
+            {
+                "title": "Groceries",
+                "description": "Get groceries for the week, including snacks, lunch, and dinner.",
+                "dueDate": "Dec 19, 2023",
+                "priority": "important"
+            }
+        ]
+    }
 ]

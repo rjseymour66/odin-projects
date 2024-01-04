@@ -13,8 +13,7 @@ const createProjectsList = () => {
     return ul;
 };
 
-// helper func
-const addProjectListItem = (ulElement, projName) => {
+const createProjectListItem = (projName) => {
     // create li
     const li = document.createElement('li');
     li.classList.add('project-item');
@@ -28,7 +27,7 @@ const addProjectListItem = (ulElement, projName) => {
     // append button to li
     li.appendChild(button);
 
-    ulElement.appendChild(li);
+    return li;
 };
 
 const createAddProjectButton = () => {
@@ -40,7 +39,7 @@ const createAddProjectButton = () => {
     return button;
 };
 
-const createProjectsSidebar = () => {
+const createProjectsSidebar = (projectNameList = []) => {
     const asideEl = document.createElement('aside');
     asideEl.classList.add('projects-sidebar');
 
@@ -55,9 +54,9 @@ const createProjectsSidebar = () => {
     asideEl.appendChild(ul);
 
     // add list items to list
-    addProjectListItem(ul, 'Project 1');
-    addProjectListItem(ul, 'Project 2');
-    addProjectListItem(ul, 'Project 3');
+    for (let project of projectNameList) {
+        ul.appendChild(createProjectListItem(project));
+    }
 
     // create button
     const addProjectButton = createAddProjectButton();
