@@ -1,4 +1,3 @@
-import todos from '../data/todo-data.json';
 
 // addtodo button
 const createAddTodoButton = () => {
@@ -98,18 +97,18 @@ const createTodoListItem = (todo) => {
 };
 
 // todo list div
-const createTodoList = (todos) => {
+const createTodoList = (projectList) => {
     const listDiv = document.createElement('div');
     listDiv.classList.add('todo-list');
 
-    for (const t of todos) {
-        listDiv.appendChild(createTodoListItem(t));
+    for (const p of projectList[0].todos) {
+        listDiv.appendChild(createTodoListItem(p));
     }
 
     return listDiv;
 };
 
-const createMain = () => {
+const createMain = (projectList) => {
     const mainEl = document.createElement('main');
     mainEl.classList.add('todo-content');
 
@@ -120,7 +119,7 @@ const createMain = () => {
     mainEl.appendChild(createPriorityList());
 
     // create/append li
-    mainEl.appendChild(createTodoList(todos));
+    mainEl.appendChild(createTodoList(projectList));
 
     return mainEl;
 };

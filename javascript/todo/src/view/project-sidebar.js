@@ -55,7 +55,7 @@ const createProjectsSidebar = (projectNameList = []) => {
 
     // add list items to list
     for (let project of projectNameList) {
-        ul.appendChild(createProjectListItem(project));
+        ul.appendChild(createProjectListItem(project.name));
     }
 
     // create button

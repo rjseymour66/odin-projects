@@ -4,6 +4,10 @@ import { createMain } from "./main";
 import { createFooter } from "./footer";
 import { createTodoModal, createProjectModal } from "./modals";
 
+import todos from '../data/todo-data.json';
+import projectList from '../data/project-data.json';
+
+
 const projects = ['Project 1', 'Project 2', 'Project 3'];
 
 // open modal by type
@@ -34,8 +38,8 @@ const RegisterCloseModal = (modalType) => {
 const createView = () => {
 
     const header = createHeader();
-    const sidebar = createProjectsSidebar();
-    const main = createMain();
+    const sidebar = createProjectsSidebar(projectList);
+    const main = createMain(projectList);
     const footer = createFooter();
     const todoModal = createTodoModal();
     const projectModal = createProjectModal();
