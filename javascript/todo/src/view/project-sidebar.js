@@ -54,8 +54,10 @@ const createProjectsSidebar = (projectNameList = []) => {
     asideEl.appendChild(ul);
 
     // add list items to list
-    for (let project of projectNameList) {
-        ul.appendChild(createProjectListItem(project.name));
+    for (const [index, project] of projectNameList.entries()) {
+        let li = createProjectListItem(project.name);
+        li.firstChild.setAttribute('data-project-index', index);
+        ul.appendChild(li);
     }
 
     // create button

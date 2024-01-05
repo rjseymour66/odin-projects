@@ -1,10 +1,10 @@
 import { createHeader } from "./header";
 import { createProjectsSidebar } from "./project-sidebar";
-import { createMain } from "./main";
+import { createMain, createTodoList } from "./main";
 import { createFooter } from "./footer";
 import { createTodoModal, createProjectModal } from "./modals";
 
-import todos from '../data/todo-data.json';
+// import todos from '../data/todo-data.json';
 import projectList from '../data/project-data.json';
 
 
@@ -35,6 +35,34 @@ const RegisterCloseModal = (modalType) => {
     });
 };
 
+// TODO
+let resetUI = () => {
+    while (mainEl.firstChild) {
+        mainEl.removeChild(mainEl.firstChild);
+    }
+};
+
+const liEventListener = () => {
+    const mainEl = document.querySelector('.todo-content');
+    const pButtons = document.querySelectorAll('.project-btn');
+    pButtons.forEach(button => {
+        button.addEventListener('click', e => {
+            pButtons.forEach(btn => btn.classList.remove('project-active'));
+            e.target.classList.add('project-active');
+
+            // display todos for that project
+            console.log(button.dataset.projectIndex);
+
+            // console.log(mainEl);
+
+            const projectIndex = button.dataset.projectIndex;
+
+            mainEl.appendChild(createTodoList(projectList[projectIndex].todos));
+
+        });
+    });
+};
+
 const createView = () => {
 
     const header = createHeader();
@@ -59,6 +87,8 @@ const createView = () => {
         contentDiv.appendChild(footer);
         contentDiv.appendChild(todoModal);
         contentDiv.appendChild(projectModal);
+
+        liEventListener();
     };
 
     initView();

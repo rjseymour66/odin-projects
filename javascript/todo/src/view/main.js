@@ -101,7 +101,7 @@ const createTodoList = (projectList) => {
     const listDiv = document.createElement('div');
     listDiv.classList.add('todo-list');
 
-    for (const p of projectList[0].todos) {
+    for (const p of projectList) {
         listDiv.appendChild(createTodoListItem(p));
     }
 
@@ -119,10 +119,10 @@ const createMain = (projectList) => {
     mainEl.appendChild(createPriorityList());
 
     // create/append li
-    mainEl.appendChild(createTodoList(projectList));
+    // mainEl.appendChild(createTodoList(projectList));
 
     return mainEl;
 };
 
 
-export { createMain };
+export { createMain, createTodoList };

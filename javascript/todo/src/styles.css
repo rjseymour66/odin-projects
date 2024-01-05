@@ -216,7 +216,7 @@ body {
   flex-grow: 1;
 }
 
-.project-item > button {
+/* .project-item > button {
   padding-block: 0.75rem;
   padding-inline: 0 1rem;
   border: none;
@@ -224,8 +224,16 @@ body {
   width: 100%;
 
   text-align: left;
+} */
 
-  /* border-radius: 10px; */
+.project-btn {
+  padding-block: 0.75rem;
+  padding-inline: 0 1rem;
+  border: none;
+  background-color: red;
+  width: 100%;
+
+  text-align: left;
 }
 
 .project-item > button:hover {
@@ -567,4 +575,11 @@ textarea {
   padding: 2rem;
   border: none;
   border-radius: 5px;
+}
+
+/******************** sidebar event listener */
+
+.project-active {
+  background-color: blue;
+  color: #fff;
 }
